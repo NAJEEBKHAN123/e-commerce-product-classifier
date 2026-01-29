@@ -4,18 +4,18 @@ torchvision==0.16.0
 torchaudio==2.1.0
 
 # Core ML
-numpy==1.24.0
+numpy>=1.23.5,<2.0
 pandas==2.0.0
 scikit-learn==1.3.0
 
-# Computer Vision - CHANGED THIS LINE
+# Computer Vision
 opencv-python==4.8.1.78
 Pillow==10.0.0
 albumentations==1.3.0
+seaborn==0.13.2
 
 # Visualization
 matplotlib==3.7.0
-seaborn==0.12.0
 
 # API & Tracking
 fastapi==0.104.1

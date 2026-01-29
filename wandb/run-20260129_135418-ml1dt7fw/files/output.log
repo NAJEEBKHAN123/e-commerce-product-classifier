@@ -1,0 +1,66 @@
+✅ WandB initialized
+Creating dataloaders...
+train dataset: 13992 images, 9 categories
+val dataset: 3632 images, 9 categories
+check dataset: 551 images, 9 categories
+✅ Categories: ['BABY_PRODUCTS', 'BEAUTY_HEALTH', 'CLOTHING_ACCESSORIES_JEWELLERY', 'ELECTRONICS', 'GROCERY', 'HOBBY_ARTS_STATIONERY', 'HOME_KITCHEN_TOOLS', 'PET_SUPPLIES', 'SPORTS_OUTDOOR']
+✅ Train batches: 438
+✅ Val batches: 114
+Initializing model...
+✅ Model initialized on cpu
+Model parameters: 104,841,865
+============================================================
+STARTING TRAINING - 2 EPOCHS
+============================================================
+========================================
+Epoch 1/2
+========================================
+Error in sys.excepthook:
+Traceback (most recent call last):
+  File "C:\Users\NAJEEB ULLAH\AppData\Local\Programs\Python\Python311\Lib\linecache.py", line 46, in getlines
+  File "C:\Users\NAJEEB ULLAH\AppData\Local\Programs\Python\Python311\Lib\linecache.py", line 136, in updatecache
+    with tokenize.open(fullname) as fp:
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NAJEEB ULLAH\AppData\Local\Programs\Python\Python311\Lib\tokenize.py", line 400, in open
+    text = TextIOWrapper(buffer, encoding, line_buffering=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen codecs>", line 309, in __init__
+KeyboardInterrupt
+Original exception was:
+Traceback (most recent call last):
+  File "D:\ecommerce-product-classifier\src\pipeline\model_training.py", line 200, in <module>
+    main()
+  File "D:\ecommerce-product-classifier\src\pipeline\model_training.py", line 139, in main
+    train_loss, train_acc = trainer.start_training_loop(epoch)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\src\model\train.py", line 56, in start_training_loop
+    outputs = self.model(images)
+              ^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\src\model\cnn.py", line 44, in forward
+    x = self.fc_layers(x)
+        ^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\nn\modules\container.py", line 215, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\nn\modules\linear.py", line 114, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

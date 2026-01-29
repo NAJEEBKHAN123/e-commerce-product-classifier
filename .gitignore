@@ -1,0 +1,13 @@
+# .gitignore
+.env
+*.pth
+__pycache__/
+*.pyc
+
+# Ignore dataset folder completely
+dataset/
+
+# Ignore compressed datasets
+*.zip
+*.tar
+*.tar.gz
