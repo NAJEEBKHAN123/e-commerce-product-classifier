@@ -1,13 +1,17 @@
-# .gitignore
-.env
-*.pth
+# Python virtual environment
+.venv/
+env/
+venv/
+
+# Byte-compiled / cache
 __pycache__/
 *.pyc
+*.pyo
 
-# Ignore dataset folder completely
+# Dataset
 dataset/
+*.h5
+*.pt
+*.pth
 
-# Ignore compressed datasets
-*.zip
-*.tar
-*.tar.gz
+
