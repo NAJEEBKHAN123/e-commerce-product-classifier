@@ -43,7 +43,7 @@ def main():
     PATIENCE = 5                   # Early stopping patience
     
     # Data path - uses Google Drive path for Colab
-    DATA_DIR = os.getenv("DATASET_PATH", "d:\\ecommerce-product-classifier\\dataset")
+    DATA_DIR = os.getenv("DATASET_PATH", "/content/drive/MyDrive/dataset")
     
     # Device configuration
     DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -188,7 +188,6 @@ def main():
         model_path="models/ecommerce_cnn",
         device=DEVICE,
         class_weights=class_weights
-        # Removed: patience=PATIENCE
     )
     
     evaluator = Evaluator(
@@ -259,7 +258,7 @@ def main():
                 no_improvement_count += 1
                 print(f"⏳ No improvement for {no_improvement_count} epoch(s)")
                 
-                # Early stopping check (manual implementation)
+                # Early stopping check
                 if no_improvement_count >= PATIENCE:
                     print(f"\n🛑 Early stopping triggered after {PATIENCE} epochs without improvement")
                     break

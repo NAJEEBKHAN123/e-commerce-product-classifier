@@ -1,0 +1,144 @@
+2026-01-30 19:09:28,653 INFO    StreamThr :25492 [internal.py:wandb_internal():86] W&B internal server running at pid: 25492, started at: 2026-01-30 19:09:28.651298
+2026-01-30 19:09:28,658 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: status
+2026-01-30 19:09:28,665 INFO    WriterThread:25492 [datastore.py:open_for_write():85] open: D:\ecommerce-product-classifier\wandb\run-20260130_190928-ph5ll5qt\run-ph5ll5qt.wandb
+2026-01-30 19:09:28,668 DEBUG   SenderThread:25492 [sender.py:send():380] send: header
+2026-01-30 19:09:28,770 DEBUG   SenderThread:25492 [sender.py:send():380] send: run
+2026-01-30 19:09:30,305 INFO    SenderThread:25492 [dir_watcher.py:__init__():211] watching files in: D:\ecommerce-product-classifier\wandb\run-20260130_190928-ph5ll5qt\files
+2026-01-30 19:09:30,305 INFO    SenderThread:25492 [sender.py:_start_run_threads():1124] run started: ph5ll5qt with start time 1769782168.654934
+2026-01-30 19:09:30,337 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: check_version
+2026-01-30 19:09:30,337 DEBUG   SenderThread:25492 [sender.py:send_request():407] send_request: check_version
+2026-01-30 19:09:32,579 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: run_start
+2026-01-30 19:09:32,633 DEBUG   HandlerThread:25492 [system_info.py:__init__():32] System info init
+2026-01-30 19:09:32,634 DEBUG   HandlerThread:25492 [system_info.py:__init__():47] System info init done
+2026-01-30 19:09:32,634 INFO    HandlerThread:25492 [system_monitor.py:start():194] Starting system monitor
+2026-01-30 19:09:32,635 INFO    SystemMonitor:25492 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2026-01-30 19:09:32,635 INFO    HandlerThread:25492 [system_monitor.py:probe():214] Collecting system info
+2026-01-30 19:09:32,643 INFO    SystemMonitor:25492 [interfaces.py:start():190] Started cpu monitoring
+2026-01-30 19:09:32,644 DEBUG   HandlerThread:25492 [system_info.py:probe():196] Probing system
+2026-01-30 19:09:32,645 INFO    SystemMonitor:25492 [interfaces.py:start():190] Started disk monitoring
+2026-01-30 19:09:32,647 INFO    SystemMonitor:25492 [interfaces.py:start():190] Started memory monitoring
+2026-01-30 19:09:32,676 INFO    SystemMonitor:25492 [interfaces.py:start():190] Started network monitoring
+2026-01-30 19:09:32,703 DEBUG   HandlerThread:25492 [system_info.py:_probe_git():181] Probing git
+2026-01-30 19:09:32,913 DEBUG   HandlerThread:25492 [system_info.py:_probe_git():189] Probing git done
+2026-01-30 19:09:32,914 DEBUG   HandlerThread:25492 [system_info.py:probe():244] Probing system done
+2026-01-30 19:09:32,914 DEBUG   HandlerThread:25492 [system_monitor.py:probe():223] {'os': 'Windows-10-10.0.26100-SP0', 'python': '3.11.9', 'heartbeatAt': '2026-01-30T14:09:32.644237', 'startedAt': '2026-01-30T14:09:28.635688', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': 'D:\\ecommerce-product-classifier\\src\\pipeline\\model_training.py', 'codePathLocal': 'src\\pipeline\\model_training.py', 'codePath': 'src\\pipeline\\model_training.py', 'git': {'remote': 'git@github.com:NAJEEBKHAN123/e-commerce-product-classifier.git', 'commit': 'a335890241375f06a78fdb0c1fa109e52b7ee662'}, 'email': 'najeebkhanlaku@gmail.com', 'root': 'D:/ecommerce-product-classifier', 'host': 'DESKTOP-ETI9000', 'username': 'NAJEEB ULLAH', 'executable': 'D:\\ecommerce-product-classifier\\.venv\\Scripts\\python.exe', 'cpu_count': 4, 'cpu_count_logical': 8, 'cpu_freq': {'current': 1496.0, 'min': 0.0, 'max': 1896.0}, 'cpu_freq_per_core': [{'current': 1496.0, 'min': 0.0, 'max': 1896.0}], 'disk': {'/': {'total': 140.72069931030273, 'used': 27.508811950683594}}, 'memory': {'total': 7.846885681152344}}
+2026-01-30 19:09:32,914 INFO    HandlerThread:25492 [system_monitor.py:probe():224] Finished collecting system info
+2026-01-30 19:09:32,914 INFO    HandlerThread:25492 [system_monitor.py:probe():227] Publishing system info
+2026-01-30 19:09:32,915 DEBUG   HandlerThread:25492 [system_info.py:_save_pip():52] Saving list of pip packages installed into the current environment
+2026-01-30 19:09:32,916 DEBUG   HandlerThread:25492 [system_info.py:_save_pip():68] Saving pip packages done
+2026-01-30 19:09:32,917 INFO    HandlerThread:25492 [system_monitor.py:probe():229] Finished publishing system info
+2026-01-30 19:09:32,928 DEBUG   SenderThread:25492 [sender.py:send():380] send: files
+2026-01-30 19:09:32,928 INFO    SenderThread:25492 [sender.py:_save_file():1380] saving file wandb-metadata.json with policy now
+2026-01-30 19:09:32,942 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: stop_status
+2026-01-30 19:09:32,943 DEBUG   SenderThread:25492 [sender.py:send_request():407] send_request: stop_status
+2026-01-30 19:09:32,946 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: internal_messages
+2026-01-30 19:09:33,317 INFO    Thread-16 :25492 [dir_watcher.py:_on_file_created():271] file/dir created: D:\ecommerce-product-classifier\wandb\run-20260130_190928-ph5ll5qt\files\requirements.txt
+2026-01-30 19:09:33,318 INFO    Thread-16 :25492 [dir_watcher.py:_on_file_created():271] file/dir created: D:\ecommerce-product-classifier\wandb\run-20260130_190928-ph5ll5qt\files\wandb-metadata.json
+2026-01-30 19:09:33,359 DEBUG   SenderThread:25492 [sender.py:send():380] send: telemetry
+2026-01-30 19:09:33,364 DEBUG   SenderThread:25492 [sender.py:send():380] send: config
+2026-01-30 19:09:34,334 INFO    Thread-16 :25492 [dir_watcher.py:_on_file_created():271] file/dir created: D:\ecommerce-product-classifier\wandb\run-20260130_190928-ph5ll5qt\files\output.log
+2026-01-30 19:09:34,375 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: status_report
+2026-01-30 19:09:36,353 INFO    Thread-16 :25492 [dir_watcher.py:_on_file_modified():288] file/dir modified: D:\ecommerce-product-classifier\wandb\run-20260130_190928-ph5ll5qt\files\output.log
+2026-01-30 19:09:37,330 INFO    wandb-upload_0:25492 [upload_job.py:push():131] Uploaded file C:\Users\NAJEEB~1\AppData\Local\Temp\tmp03jp6575wandb\8ivxmq7c-wandb-metadata.json
+2026-01-30 19:09:39,444 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: status_report
+2026-01-30 19:09:44,709 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: status_report
+2026-01-30 19:09:48,036 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: internal_messages
+2026-01-30 19:09:48,037 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: stop_status
+2026-01-30 19:09:48,041 DEBUG   SenderThread:25492 [sender.py:send_request():407] send_request: stop_status
+2026-01-30 19:09:50,539 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: status_report
+2026-01-30 19:09:51,661 DEBUG   SenderThread:25492 [sender.py:send():380] send: exit
+2026-01-30 19:09:51,662 INFO    SenderThread:25492 [sender.py:send_exit():585] handling exit code: 0
+2026-01-30 19:09:51,663 INFO    SenderThread:25492 [sender.py:send_exit():587] handling runtime: 19
+2026-01-30 19:09:51,665 INFO    SenderThread:25492 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2026-01-30 19:09:51,667 INFO    SenderThread:25492 [sender.py:send_exit():593] send defer
+2026-01-30 19:09:51,668 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: defer
+2026-01-30 19:09:51,668 INFO    HandlerThread:25492 [handler.py:handle_request_defer():172] handle defer: 0
+2026-01-30 19:09:51,669 DEBUG   SenderThread:25492 [sender.py:send_request():407] send_request: defer
+2026-01-30 19:09:51,669 INFO    SenderThread:25492 [sender.py:send_request_defer():609] handle sender defer: 0
+2026-01-30 19:09:51,669 INFO    SenderThread:25492 [sender.py:transition_state():613] send defer: 1
+2026-01-30 19:09:51,670 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: defer
+2026-01-30 19:09:51,670 INFO    HandlerThread:25492 [handler.py:handle_request_defer():172] handle defer: 1
+2026-01-30 19:09:51,671 DEBUG   SenderThread:25492 [sender.py:send_request():407] send_request: defer
+2026-01-30 19:09:51,672 INFO    SenderThread:25492 [sender.py:send_request_defer():609] handle sender defer: 1
+2026-01-30 19:09:51,672 INFO    SenderThread:25492 [sender.py:transition_state():613] send defer: 2
+2026-01-30 19:09:51,673 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: defer
+2026-01-30 19:09:51,673 INFO    HandlerThread:25492 [handler.py:handle_request_defer():172] handle defer: 2
+2026-01-30 19:09:51,673 INFO    HandlerThread:25492 [system_monitor.py:finish():203] Stopping system monitor
+2026-01-30 19:09:51,674 DEBUG   SystemMonitor:25492 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2026-01-30 19:09:51,674 DEBUG   SystemMonitor:25492 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2026-01-30 19:09:51,675 INFO    HandlerThread:25492 [interfaces.py:finish():202] Joined cpu monitor
+2026-01-30 19:09:51,675 DEBUG   SystemMonitor:25492 [system_monitor.py:_start():183] Publishing last batch of metrics
+2026-01-30 19:09:51,676 INFO    HandlerThread:25492 [interfaces.py:finish():202] Joined disk monitor
+2026-01-30 19:09:51,679 INFO    HandlerThread:25492 [interfaces.py:finish():202] Joined memory monitor
+2026-01-30 19:09:51,680 INFO    HandlerThread:25492 [interfaces.py:finish():202] Joined network monitor
+2026-01-30 19:09:51,680 DEBUG   SenderThread:25492 [sender.py:send_request():407] send_request: defer
+2026-01-30 19:09:51,680 INFO    SenderThread:25492 [sender.py:send_request_defer():609] handle sender defer: 2
+2026-01-30 19:09:51,681 INFO    SenderThread:25492 [sender.py:transition_state():613] send defer: 3
+2026-01-30 19:09:51,681 DEBUG   SenderThread:25492 [sender.py:send():380] send: stats
+2026-01-30 19:09:51,681 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: defer
+2026-01-30 19:09:51,682 INFO    HandlerThread:25492 [handler.py:handle_request_defer():172] handle defer: 3
+2026-01-30 19:09:51,683 DEBUG   SenderThread:25492 [sender.py:send_request():407] send_request: defer
+2026-01-30 19:09:51,683 INFO    SenderThread:25492 [sender.py:send_request_defer():609] handle sender defer: 3
+2026-01-30 19:09:51,683 INFO    SenderThread:25492 [sender.py:transition_state():613] send defer: 4
+2026-01-30 19:09:51,683 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: defer
+2026-01-30 19:09:51,683 INFO    HandlerThread:25492 [handler.py:handle_request_defer():172] handle defer: 4
+2026-01-30 19:09:51,684 DEBUG   SenderThread:25492 [sender.py:send_request():407] send_request: defer
+2026-01-30 19:09:51,684 INFO    SenderThread:25492 [sender.py:send_request_defer():609] handle sender defer: 4
+2026-01-30 19:09:51,684 INFO    SenderThread:25492 [sender.py:transition_state():613] send defer: 5
+2026-01-30 19:09:51,685 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: defer
+2026-01-30 19:09:51,685 INFO    HandlerThread:25492 [handler.py:handle_request_defer():172] handle defer: 5
+2026-01-30 19:09:51,686 DEBUG   SenderThread:25492 [sender.py:send():380] send: summary
+2026-01-30 19:09:51,686 INFO    SenderThread:25492 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2026-01-30 19:09:51,688 DEBUG   SenderThread:25492 [sender.py:send_request():407] send_request: defer
+2026-01-30 19:09:51,688 INFO    SenderThread:25492 [sender.py:send_request_defer():609] handle sender defer: 5
+2026-01-30 19:09:51,688 INFO    SenderThread:25492 [sender.py:transition_state():613] send defer: 6
+2026-01-30 19:09:51,689 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: defer
+2026-01-30 19:09:51,689 INFO    HandlerThread:25492 [handler.py:handle_request_defer():172] handle defer: 6
+2026-01-30 19:09:51,690 DEBUG   SenderThread:25492 [sender.py:send_request():407] send_request: defer
+2026-01-30 19:09:51,690 INFO    SenderThread:25492 [sender.py:send_request_defer():609] handle sender defer: 6
+2026-01-30 19:09:51,698 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: status_report
+2026-01-30 19:09:52,057 INFO    SenderThread:25492 [sender.py:transition_state():613] send defer: 7
+2026-01-30 19:09:52,057 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: defer
+2026-01-30 19:09:52,058 INFO    HandlerThread:25492 [handler.py:handle_request_defer():172] handle defer: 7
+2026-01-30 19:09:52,058 DEBUG   SenderThread:25492 [sender.py:send_request():407] send_request: defer
+2026-01-30 19:09:52,059 INFO    SenderThread:25492 [sender.py:send_request_defer():609] handle sender defer: 7
+2026-01-30 19:09:52,374 INFO    Thread-16 :25492 [dir_watcher.py:_on_file_modified():288] file/dir modified: D:\ecommerce-product-classifier\wandb\run-20260130_190928-ph5ll5qt\files\config.yaml
+2026-01-30 19:09:52,376 INFO    Thread-16 :25492 [dir_watcher.py:_on_file_modified():288] file/dir modified: D:\ecommerce-product-classifier\wandb\run-20260130_190928-ph5ll5qt\files\output.log
+2026-01-30 19:09:52,376 INFO    Thread-16 :25492 [dir_watcher.py:_on_file_created():271] file/dir created: D:\ecommerce-product-classifier\wandb\run-20260130_190928-ph5ll5qt\files\wandb-summary.json
+2026-01-30 19:09:52,670 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: poll_exit
+2026-01-30 19:09:53,392 INFO    Thread-16 :25492 [dir_watcher.py:_on_file_modified():288] file/dir modified: D:\ecommerce-product-classifier\wandb\run-20260130_190928-ph5ll5qt\files\output.log
+2026-01-30 19:09:55,049 INFO    SenderThread:25492 [sender.py:transition_state():613] send defer: 8
+2026-01-30 19:09:55,050 DEBUG   SenderThread:25492 [sender.py:send_request():407] send_request: poll_exit
+2026-01-30 19:09:55,050 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: defer
+2026-01-30 19:09:55,050 INFO    HandlerThread:25492 [handler.py:handle_request_defer():172] handle defer: 8
+2026-01-30 19:09:55,051 DEBUG   SenderThread:25492 [sender.py:send_request():407] send_request: defer
+2026-01-30 19:09:55,051 INFO    SenderThread:25492 [sender.py:send_request_defer():609] handle sender defer: 8
+2026-01-30 19:09:55,052 INFO    SenderThread:25492 [job_builder.py:build():298] Attempting to build job artifact
+2026-01-30 19:09:55,053 INFO    SenderThread:25492 [job_builder.py:_get_source_type():428] is repo sourced job
+2026-01-30 19:09:55,229 INFO    SenderThread:25492 [job_builder.py:build():404] adding wandb-job metadata file
+2026-01-30 19:09:55,254 INFO    SenderThread:25492 [sender.py:transition_state():613] send defer: 9
+2026-01-30 19:09:55,255 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: defer
+2026-01-30 19:09:55,255 INFO    HandlerThread:25492 [handler.py:handle_request_defer():172] handle defer: 9
+2026-01-30 19:09:55,256 DEBUG   SenderThread:25492 [sender.py:send():380] send: artifact
+2026-01-30 19:09:55,422 INFO    Thread-16 :25492 [dir_watcher.py:_on_file_modified():288] file/dir modified: D:\ecommerce-product-classifier\wandb\run-20260130_190928-ph5ll5qt\files\output.log
+2026-01-30 19:09:57,111 INFO    SenderThread:25492 [sender.py:send_artifact():1458] sent artifact job-git_github.com_NAJEEBKHAN123_e-commerce-product-classifier.git_src_pipeline_model_training.py - {'id': 'QXJ0aWZhY3Q6MjQxNDQ1NzAwMw==', 'state': 'COMMITTED', 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjg0NDk4ODYyMA==', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6MjQxNDQ1NzAwMw==', 'versionIndex': 3}}}
+2026-01-30 19:09:57,111 DEBUG   SenderThread:25492 [sender.py:send_request():407] send_request: defer
+2026-01-30 19:09:57,113 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: status_report
+2026-01-30 19:09:57,113 INFO    SenderThread:25492 [sender.py:send_request_defer():609] handle sender defer: 9
+2026-01-30 19:09:57,114 INFO    SenderThread:25492 [dir_watcher.py:finish():358] shutting down directory watcher
+2026-01-30 19:09:57,448 INFO    SenderThread:25492 [dir_watcher.py:finish():388] scan: D:\ecommerce-product-classifier\wandb\run-20260130_190928-ph5ll5qt\files
+2026-01-30 19:09:57,450 INFO    SenderThread:25492 [dir_watcher.py:finish():402] scan save: D:\ecommerce-product-classifier\wandb\run-20260130_190928-ph5ll5qt\files\config.yaml config.yaml
+2026-01-30 19:09:57,450 INFO    SenderThread:25492 [dir_watcher.py:finish():402] scan save: D:\ecommerce-product-classifier\wandb\run-20260130_190928-ph5ll5qt\files\output.log output.log
+2026-01-30 19:09:57,455 INFO    SenderThread:25492 [dir_watcher.py:finish():402] scan save: D:\ecommerce-product-classifier\wandb\run-20260130_190928-ph5ll5qt\files\requirements.txt requirements.txt
+2026-01-30 19:09:57,460 INFO    SenderThread:25492 [dir_watcher.py:finish():402] scan save: D:\ecommerce-product-classifier\wandb\run-20260130_190928-ph5ll5qt\files\wandb-metadata.json wandb-metadata.json
+2026-01-30 19:09:57,461 INFO    SenderThread:25492 [dir_watcher.py:finish():402] scan save: D:\ecommerce-product-classifier\wandb\run-20260130_190928-ph5ll5qt\files\wandb-summary.json wandb-summary.json
+2026-01-30 19:09:57,464 INFO    SenderThread:25492 [sender.py:transition_state():613] send defer: 10
+2026-01-30 19:09:57,469 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: defer
+2026-01-30 19:09:57,469 INFO    HandlerThread:25492 [handler.py:handle_request_defer():172] handle defer: 10
+2026-01-30 19:09:57,474 DEBUG   SenderThread:25492 [sender.py:send_request():407] send_request: defer
+2026-01-30 19:09:57,476 INFO    SenderThread:25492 [sender.py:send_request_defer():609] handle sender defer: 10
+2026-01-30 19:09:57,477 INFO    SenderThread:25492 [file_pusher.py:finish():175] shutting down file pusher
+2026-01-30 19:09:57,726 DEBUG   HandlerThread:25492 [handler.py:handle_request():146] handle_request: keepalive
+2026-01-30 19:09:58,250 INFO    wandb-upload_0:25492 [upload_job.py:push():131] Uploaded file D:\ecommerce-product-classifier\wandb\run-20260130_190928-ph5ll5qt\files\config.yaml
+2026-01-30 19:09:59,471 INFO    wandb-upload_3:25492 [upload_job.py:push():131] Uploaded file D:\ecommerce-product-classifier\wandb\run-20260130_190928-ph5ll5qt\files\wandb-summary.json
+2026-01-30 19:09:59,532 INFO    wandb-upload_1:25492 [upload_job.py:push():131] Uploaded file D:\ecommerce-product-classifier\wandb\run-20260130_190928-ph5ll5qt\files\output.log

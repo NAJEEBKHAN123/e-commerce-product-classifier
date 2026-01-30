@@ -1,0 +1,27 @@
+✅ WandB initialized
+🔗 View at: https://wandb.ai/najeebkhanlaku-agriculture-university/ecommerce-product-classifier/runs/ph5ll5qt
+📊 Creating dataloaders...
+   Windows detected: Using 0 workers
+📊 Creating dataloaders with num_workers=0 (Windows mode)
+train dataset: 13992 images, 9 categories
+val dataset: 3632 images, 9 categories
+check dataset: 551 images, 9 categories
+✅ Categories (9): ['BABY_PRODUCTS', 'BEAUTY_HEALTH', 'CLOTHING_ACCESSORIES_JEWELLERY', 'ELECTRONICS', 'GROCERY', 'HOBBY_ARTS_STATIONERY', 'HOME_KITCHEN_TOOLS', 'PET_SUPPLIES', 'SPORTS_OUTDOOR']
+✅ Train: 13992 images, 219 batches
+✅ Validation: 3632 images, 57 batches
+✅ Using class weights for imbalanced data
+🤖 Initializing model...
+✅ Model initialized on cpu
+📊 Model parameters: 1,686,537
+============================================================
+🚀 STARTING TRAINING - 10 EPOCHS
+============================================================
+========================================
+📅 Epoch 1/10
+========================================
+🎯 Training...
+⚠️  Training interrupted by user
+Exception ignored in: <module 'threading' from 'C:\\Users\\NAJEEB ULLAH\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\threading.py'>
+Traceback (most recent call last):
+  File "C:\Users\NAJEEB ULLAH\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1541, in _shutdown
+KeyboardInterrupt:

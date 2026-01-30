@@ -1,0 +1,59 @@
+wandb_version: 1
+
+epochs:
+  desc: null
+  value: 10
+batch_size:
+  desc: null
+  value: 32
+learning_rate:
+  desc: null
+  value: 0.001
+device:
+  desc: null
+  value: cpu
+model:
+  desc: null
+  value: ProductCNN
+optimizer:
+  desc: null
+  value: Adam
+loss:
+  desc: null
+  value: CrossEntropyLoss
+_wandb:
+  desc: null
+  value:
+    python_version: 3.11.9
+    cli_version: 0.16.0
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1769782113.566664
+    t:
+      1:
+      - 1
+      - 5
+      - 41
+      - 53
+      - 55
+      2:
+      - 1
+      - 5
+      - 41
+      - 53
+      - 55
+      3:
+      - 2
+      - 13
+      - 16
+      - 23
+      4: 3.11.9
+      5: 0.16.0
+      8:
+      - 3
+      - 5
+      13: windows-amd64
+total_parameters:
+  desc: null
+  value: 1686537
