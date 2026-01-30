@@ -39,8 +39,8 @@ def main():
     # ========== TRAINING CONFIGURATION ==========
     EPOCHS = 10                    # Train for 10 epochs
     BATCH_SIZE = 64                # Increased for GPU efficiency
-    LEARNING_RATE = 0.01           # Optimal for SGD
-    PATIENCE = 5                   # Early stopping patience
+    LEARNING_RATE = 0.001          # Changed to 0.001 for better convergence
+    PATIENCE = 5                   # Early stopping patience (used manually)
     
     # Data path - uses Google Drive path for Colab
     DATA_DIR = os.getenv("DATASET_PATH", "/content/drive/MyDrive/dataset")
@@ -188,6 +188,7 @@ def main():
         model_path="models/ecommerce_cnn",
         device=DEVICE,
         class_weights=class_weights
+        # Removed: patience=PATIENCE
     )
     
     evaluator = Evaluator(
@@ -258,7 +259,7 @@ def main():
                 no_improvement_count += 1
                 print(f"⏳ No improvement for {no_improvement_count} epoch(s)")
                 
-                # Early stopping check
+                # Early stopping check (manual implementation)
                 if no_improvement_count >= PATIENCE:
                     print(f"\n🛑 Early stopping triggered after {PATIENCE} epochs without improvement")
                     break
