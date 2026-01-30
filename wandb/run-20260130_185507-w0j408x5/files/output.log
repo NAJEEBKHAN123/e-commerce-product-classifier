@@ -1,0 +1,21 @@
+✅ WandB initialized
+🔗 View at: https://wandb.ai/najeebkhanlaku-agriculture-university/ecommerce-product-classifier/runs/w0j408x5
+📊 Creating dataloaders...
+   Windows detected: Using 0 workers
+📊 Creating dataloaders with num_workers=0 (Windows mode)
+train dataset: 13992 images, 9 categories
+val dataset: 3632 images, 9 categories
+check dataset: 551 images, 9 categories
+✅ Categories (9): ['BABY_PRODUCTS', 'BEAUTY_HEALTH', 'CLOTHING_ACCESSORIES_JEWELLERY', 'ELECTRONICS', 'GROCERY', 'HOBBY_ARTS_STATIONERY', 'HOME_KITCHEN_TOOLS', 'PET_SUPPLIES', 'SPORTS_OUTDOOR']
+✅ Train: 13992 images, 438 batches
+✅ Validation: 3632 images, 114 batches
+✅ Using class weights for imbalanced data
+🤖 Initializing model...
+✅ Model initialized on cpu
+📊 Model parameters: 1,686,537
+❌ Unexpected error: Trainer.__init__() got an unexpected keyword argument 'patience'
+Traceback (most recent call last):
+  File "D:\ecommerce-product-classifier\src\pipeline\model_training.py", line 183, in main
+    trainer = Trainer(
+              ^^^^^^^^
+TypeError: Trainer.__init__() got an unexpected keyword argument 'patience'
