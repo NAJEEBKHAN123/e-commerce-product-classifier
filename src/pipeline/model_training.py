@@ -92,10 +92,11 @@ def main():
             print("⚠️  Running without WandB")
         
         # Create dataloaders
+# Create dataloaders
         print("\nCreating dataloaders...")
         try:
-            # For Colab, use 2 workers; for Windows in VS Code, use 0
-            num_workers = 2  # Colab can handle multiple workers
+            # WINDOWS FIX: MUST use 0 workers on Windows
+            num_workers = 0 if os.name == 'nt' else 2  # 0 for Windows, 2 for Colab
             
             train_loader, val_loader, _, class_weights, categories = create_dataloaders(
                 data_dir=DATA_DIR,

@@ -1,0 +1,19 @@
+✅ WandB initialized
+Creating dataloaders...
+📊 Creating dataloaders with num_workers=0 (Windows mode)
+train dataset: 13992 images, 9 categories
+val dataset: 3632 images, 9 categories
+check dataset: 551 images, 9 categories
+✅ Categories: ['BABY_PRODUCTS', 'BEAUTY_HEALTH', 'CLOTHING_ACCESSORIES_JEWELLERY', 'ELECTRONICS', 'GROCERY', 'HOBBY_ARTS_STATIONERY', 'HOME_KITCHEN_TOOLS', 'PET_SUPPLIES', 'SPORTS_OUTDOOR']
+✅ Train batches: 438
+✅ Val batches: 114
+✅ Using class weights for imbalance
+Initializing model...
+✅ Model initialized on cpu
+Model parameters: 104,841,865
+============================================================
+STARTING TRAINING - 10 EPOCHS
+============================================================
+========================================
+Epoch 1/10
+========================================
