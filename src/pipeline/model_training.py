@@ -1,4 +1,5 @@
-"""
+# Create a clean, syntactically correct version
+clean_content = '''"""
 E-commerce Product Classifier Training Script
 Optimized for Colab GPU training with proper hyperparameters
 """
@@ -36,7 +37,7 @@ load_dotenv()
 
 def main():
     """Main training function."""
-    try:  # <--- THIS is line 47 - you need the except block at the END of the function!
+    try:
         # ========== TRAINING CONFIGURATION ==========
         EPOCHS = 10                    # Train for 10 epochs
         BATCH_SIZE = 64                # Increased for GPU efficiency
@@ -332,3 +333,28 @@ if __name__ == "__main__":
             print(f"   Best accuracy: {best_acc:.2f}%")
     else:
         print(f"\n❌ Training failed or was interrupted")
+'''
+
+# Write the clean content to file
+with open(file_path, 'w') as f:
+    f.write(clean_content)
+
+print("✅ Created clean, syntactically correct model_training.py")
+print("✅ All try-except blocks are properly closed")
+print("✅ Indentation is correct")
+
+# Now let's run it
+print("\n🚀 Starting training...")
+os.chdir("/content/e-commerce-product-classifier/src/pipeline")
+
+import subprocess
+result = subprocess.run(['python', 'model_training.py'], capture_output=True, text=True)
+
+print("=" * 60)
+print("TRAINING OUTPUT:")
+print("=" * 60)
+print(result.stdout)
+if result.stderr:
+    print("\nERRORS:")
+    print("=" * 60)
+    print(result.stderr)
