@@ -1,7 +1,4 @@
-"""
-E-commerce Product Classifier Training Script
-Optimized for Colab GPU training with proper hyperparameters
-"""
+
 
 import multiprocessing
 import sys
