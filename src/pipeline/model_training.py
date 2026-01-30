@@ -9,7 +9,6 @@ project_root = os.path.dirname(
     )
 )
 sys.path.insert(0, project_root)
-
 print(f"📁 Project root: {project_root}")
 
 # ================= MATPLOTLIB FIX =================
@@ -33,6 +32,10 @@ from dotenv import load_dotenv
 # ================= ENV VARIABLES =================
 load_dotenv()
 
+# ================= AMP / Mixed Precision =================
+use_amp = torch.cuda.is_available()
+if use_amp:
+    print("⚡ Mixed precision (AMP) enabled for faster GPU training")
 
 def main():
     """Main training function"""
@@ -65,7 +68,6 @@ def main():
     if not os.path.exists(DATA_DIR):
         print(f"❌ Dataset not found: {DATA_DIR}")
         return None
-
     print("✅ Dataset found")
 
     # ========== WANDB ==========
@@ -94,12 +96,12 @@ def main():
 
     # ========== DATALOADERS ==========
     print("\n📊 Creating dataloaders...")
-
     try:
         if os.name == "nt":
             num_workers = 0
         else:
-            num_workers = min(4, multiprocessing.cpu_count() // 2)
+            cpu_count = multiprocessing.cpu_count()
+            num_workers = min(8, cpu_count // 2)  # faster for Colab/Linux
 
         train_loader, val_loader, _, class_weights, categories = create_dataloaders(
             data_dir=DATA_DIR,
@@ -131,7 +133,8 @@ def main():
         model=model,
         model_path="models/ecommerce_cnn",
         device=DEVICE,
-        class_weights=class_weights
+        class_weights=class_weights,
+        use_amp=use_amp  # <- AMP flag for trainer
     )
 
     evaluator = Evaluator(
@@ -146,20 +149,20 @@ def main():
 
     # ========== TRAINING LOOP ==========
     print("\n🚀 STARTING TRAINING")
-
     for epoch in range(EPOCHS):
         print("\n" + "=" * 40)
         print(f"📅 Epoch {epoch + 1}/{EPOCHS}")
         print("=" * 40)
 
+        # Training
         train_loss, train_acc = trainer.start_training_loop(epoch + 1)
 
         if train_loss is None:
             print("❌ Training failed")
             break
 
+        # Validation
         val_results = evaluator.start_evaluation_loop(epoch + 1)
-
         if val_results:
             val_loss = val_results["average_loss"]
             val_acc = val_results["accuracy"]
@@ -190,7 +193,6 @@ def main():
             else:
                 no_improve += 1
                 print(f"⏳ No improvement: {no_improve}/{PATIENCE}")
-
                 if no_improve >= PATIENCE:
                     print("🛑 Early stopping")
                     break
@@ -199,7 +201,6 @@ def main():
     print(f"🏆 Best accuracy: {best_accuracy:.2f}%")
 
     trainer.save_model(EPOCHS, best_accuracy, final=True)
-
     if use_wandb:
         wandb.finish()
 
