@@ -1,4 +1,4 @@
-# src/pipeline/model_training.py - UPDATED
+# src/pipeline/model_training.py - UPDATED FOR COLAB
 import sys
 import os
 
@@ -31,10 +31,13 @@ load_dotenv()
 def main():
     try:
         # Training Config
-        EPOCHS = 2  # Start with 2 epochs for testing
+        EPOCHS = 10  # Changed from 2 to 10 for proper training
         BATCH_SIZE = 32
         LEARNING_RATE = 0.001
-        DATA_DIR = os.getenv("DATASET_PATH", "d:\\ecommerce-product-classifier\\dataset")
+        
+        # FIXED: Use Google Drive path for Colab, with Windows fallback for VS Code
+        DATA_DIR = os.getenv("DATASET_PATH", "/content/drive/MyDrive/dataset")
+        
         DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
         
         print("="*60)
@@ -48,24 +51,43 @@ def main():
         # Check dataset
         if not os.path.exists(DATA_DIR):
             print(f"❌ Dataset not found: {DATA_DIR}")
-            return
+            print("Trying alternative paths...")
+            
+            # Try Windows path (for VS Code)
+            windows_path = "d:\\ecommerce-product-classifier\\dataset"
+            if os.path.exists(windows_path):
+                DATA_DIR = windows_path
+                print(f"✅ Found dataset at Windows path: {DATA_DIR}")
+            else:
+                # Try current directory
+                current_path = "dataset"
+                if os.path.exists(current_path):
+                    DATA_DIR = current_path
+                    print(f"✅ Found dataset at: {DATA_DIR}")
+                else:
+                    print("❌ Dataset not found in any location")
+                    return
         
         print("✅ Dataset found")
         
-        # Initialize WandB
+        # Initialize WandB (optional)
         wandb_api_key = os.getenv("WANDB_API_KEY")
         if wandb_api_key:
-            wandb.init(
-                project="ecommerce-product-classifier",
-                config={
-                    "epochs": EPOCHS,
-                    "batch_size": BATCH_SIZE,
-                    "learning_rate": LEARNING_RATE,
-                    "device": DEVICE
-                },
-                name=f"test-run-{datetime.now().strftime('%H%M%S')}"
-            )
-            print("✅ WandB initialized")
+            try:
+                wandb.init(
+                    project="ecommerce-product-classifier",
+                    config={
+                        "epochs": EPOCHS,
+                        "batch_size": BATCH_SIZE,
+                        "learning_rate": LEARNING_RATE,
+                        "device": DEVICE
+                    },
+                    name=f"run-{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+                )
+                print("✅ WandB initialized")
+            except Exception as e:
+                print(f"⚠️  WandB initialization failed: {e}")
+                wandb_api_key = None
         else:
             print("⚠️  Running without WandB")
         
@@ -75,11 +97,13 @@ def main():
             train_loader, val_loader, _, class_weights, categories = create_dataloaders(
                 data_dir=DATA_DIR,
                 batch_size=BATCH_SIZE,
-                num_workers=0  # Use 0 for Windows
+                num_workers=2  # Changed to 2 for Colab (0 was for Windows)
             )
             print(f"✅ Categories: {categories}")
             print(f"✅ Train batches: {len(train_loader)}")
             print(f"✅ Val batches: {len(val_loader)}")
+            if class_weights is not None:
+                print(f"✅ Using class weights for imbalance")
         except Exception as e:
             print(f"❌ Error creating dataloaders: {e}")
             print("\nDebugging dataset structure...")
@@ -91,7 +115,8 @@ def main():
                     if os.path.exists(split_path):
                         print(f"\n{split.upper()} folder:")
                         categories = os.listdir(split_path)
-                        for cat in categories[:5]:  # Show first 5
+                        print(f"  Categories: {len(categories)}")
+                        for cat in categories[:3]:  # Show first 3
                             cat_path = os.path.join(split_path, cat)
                             if os.path.isdir(cat_path):
                                 images = [f for f in os.listdir(cat_path) 
@@ -101,9 +126,15 @@ def main():
         
         # Initialize model
         print("\nInitializing model...")
-        model = ProductCNN(num_classes=9).to(DEVICE)
-        print(f"✅ Model initialized on {DEVICE}")
-        print(f"Model parameters: {sum(p.numel() for p in model.parameters()):,}")
+        try:
+            model = ProductCNN(num_classes=len(categories)).to(DEVICE)
+            print(f"✅ Model initialized on {DEVICE}")
+            print(f"Model parameters: {sum(p.numel() for p in model.parameters()):,}")
+        except Exception as e:
+            print(f"❌ Error initializing model: {e}")
+            # Try with default 9 classes
+            model = ProductCNN(num_classes=9).to(DEVICE)
+            print(f"✅ Model initialized with 9 classes on {DEVICE}")
         
         # Initialize trainer and evaluator
         trainer = Trainer(
@@ -136,14 +167,14 @@ def main():
             print(f"{'='*40}")
             
             # Training
-            train_loss, train_acc = trainer.start_training_loop(epoch)
+            train_loss, train_acc = trainer.start_training_loop(epoch+1)
             if train_loss is None:
                 print("❌ Training failed, stopping...")
                 break
             
             # Validation
             print("\nValidation...")
-            val_results = evaluator.start_evaluation_loop(epoch)
+            val_results = evaluator.start_evaluation_loop(epoch+1)
             
             if val_results:
                 val_loss = val_results['average_loss']
@@ -160,17 +191,20 @@ def main():
                         "train_loss": train_loss,
                         "train_accuracy": train_acc,
                         "val_loss": val_loss,
-                        "val_accuracy": val_acc
+                        "val_accuracy": val_acc,
+                        "learning_rate": trainer.optimizer.param_groups[0]['lr']
                     })
                 
                 # Save best model
                 if val_acc > best_accuracy:
                     best_accuracy = val_acc
-                    model_path = trainer.save_model(epoch=epoch, accuracy=val_acc)
+                    model_path = trainer.save_model(epoch=epoch+1, accuracy=val_acc)
                     print(f"✅ New best model saved: {val_acc:.2f}%")
                     
-                    if wandb_api_key:
+                    if wandb_api_key and model_path:
                         wandb.save(model_path)
+            else:
+                print("❌ Validation failed")
         
         print(f"\n{'='*60}")
         print("TRAINING COMPLETE!")
@@ -179,14 +213,17 @@ def main():
         
         # Save final model
         final_path = trainer.save_model(epoch=EPOCHS, accuracy=best_accuracy)
-        print(f"Final model saved to: {final_path}")
+        if final_path:
+            print(f"Final model saved to: {final_path}")
         
         if wandb_api_key:
             wandb.finish()
             print("✅ Check results at: https://wandb.ai/home")
         
+        return best_accuracy
+        
     except Exception as e:
-        print(f"\n❌ Error: {e}")
+        print(f"\n❌ Unexpected error: {e}")
         import traceback
         traceback.print_exc()
         
@@ -195,6 +232,8 @@ def main():
                 wandb.finish()
         except:
             pass
+        
+        return None
 
-if __name__ == "__main__":
+if __name__ == "__main__": 
     main()
