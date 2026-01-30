@@ -1,4 +1,5 @@
-# src/pipeline/model_training.py - UPDATED FOR COLAB
+# src/pipeline/model_training.py - CORRECTED SYNTAX
+import multiprocessing
 import sys
 import os
 
@@ -31,11 +32,11 @@ load_dotenv()
 def main():
     try:
         # Training Config
-        EPOCHS = 10  # Changed from 2 to 10 for proper training
+        EPOCHS = 10
         BATCH_SIZE = 32
         LEARNING_RATE = 0.001
         
-        # FIXED: Use Google Drive path for Colab, with Windows fallback for VS Code
+        # Use Google Drive path for Colab
         DATA_DIR = os.getenv("DATASET_PATH", "/content/drive/MyDrive/dataset")
         
         DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -51,7 +52,6 @@ def main():
         # Check dataset
         if not os.path.exists(DATA_DIR):
             print(f"❌ Dataset not found: {DATA_DIR}")
-            print("Trying alternative paths...")
             
             # Try Windows path (for VS Code)
             windows_path = "d:\\ecommerce-product-classifier\\dataset"
@@ -94,10 +94,13 @@ def main():
         # Create dataloaders
         print("\nCreating dataloaders...")
         try:
+            # For Colab, use 2 workers; for Windows in VS Code, use 0
+            num_workers = 2  # Colab can handle multiple workers
+            
             train_loader, val_loader, _, class_weights, categories = create_dataloaders(
                 data_dir=DATA_DIR,
                 batch_size=BATCH_SIZE,
-                num_workers=2  # Changed to 2 for Colab (0 was for Windows)
+                num_workers=num_workers
             )
             print(f"✅ Categories: {categories}")
             print(f"✅ Train batches: {len(train_loader)}")
@@ -116,7 +119,7 @@ def main():
                         print(f"\n{split.upper()} folder:")
                         categories = os.listdir(split_path)
                         print(f"  Categories: {len(categories)}")
-                        for cat in categories[:3]:  # Show first 3
+                        for cat in categories[:3]:
                             cat_path = os.path.join(split_path, cat)
                             if os.path.isdir(cat_path):
                                 images = [f for f in os.listdir(cat_path) 
@@ -235,5 +238,10 @@ def main():
         
         return None
 
-if __name__ == "__main__": 
+# Windows multiprocessing safety - ONLY for Windows
+if __name__ == "__main__":
+    # Only call freeze_support on Windows
+    if os.name == 'nt':
+        multiprocessing.freeze_support()
+    
     main()

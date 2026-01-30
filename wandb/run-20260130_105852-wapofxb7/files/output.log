@@ -1,0 +1,49 @@
+✅ WandB initialized
+Creating dataloaders...
+train dataset: 13992 images, 9 categories
+val dataset: 3632 images, 9 categories
+check dataset: 551 images, 9 categories
+✅ Categories: ['BABY_PRODUCTS', 'BEAUTY_HEALTH', 'CLOTHING_ACCESSORIES_JEWELLERY', 'ELECTRONICS', 'GROCERY', 'HOBBY_ARTS_STATIONERY', 'HOME_KITCHEN_TOOLS', 'PET_SUPPLIES', 'SPORTS_OUTDOOR']
+✅ Train batches: 438
+✅ Val batches: 114
+✅ Using class weights for imbalance
+Initializing model...
+✅ Model initialized on cpu
+Model parameters: 104,841,865
+============================================================
+STARTING TRAINING - 10 EPOCHS
+============================================================
+========================================
+Epoch 1/10
+========================================
+Error in training loop at epoch 1: DataLoader worker (pid(s) 17904, 25208) exited unexpectedly
+❌ Training failed, stopping...
+============================================================
+TRAINING COMPLETE!
+============================================================
+Best validation accuracy: 0.00%
+Traceback (most recent call last):
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\utils\data\dataloader.py", line 1132, in _try_get_data
+    data = self._data_queue.get(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NAJEEB ULLAH\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+The above exception was the direct cause of the following exception:
+Traceback (most recent call last):
+  File "D:\ecommerce-product-classifier\src\model\train.py", line 57, in start_training_loop
+    for batch_idx, batch_data in enumerate(self.data_loader):
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\utils\data\dataloader.py", line 630, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\utils\data\dataloader.py", line 1328, in _next_data
+    idx, data = self._get_data()
+                ^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\utils\data\dataloader.py", line 1294, in _get_data
+    success, data = self._try_get_data()
+                    ^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\utils\data\dataloader.py", line 1145, in _try_get_data
+    raise RuntimeError(f'DataLoader worker (pid(s) {pids_str}) exited unexpectedly') from e
+RuntimeError: DataLoader worker (pid(s) 17904, 25208) exited unexpectedly
+Model saved to: models\ecommerce_cnn_epoch10_acc0.00.pth
+Final model saved to: models\ecommerce_cnn_epoch10_acc0.00.pth
