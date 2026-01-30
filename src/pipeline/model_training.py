@@ -40,7 +40,7 @@ def main():
         # ========== TRAINING CONFIGURATION ==========
         EPOCHS = 10                    # Train for 10 epochs
         BATCH_SIZE = 64                # Increased for GPU efficiency
-        LEARNING_RATE = 0.001
+        LEARNING_RATE = 0.005
         PATIENCE = 5                   # Early stopping patience
         
         # Data path - uses Google Drive path for Colab

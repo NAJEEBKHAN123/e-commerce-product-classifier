@@ -1,4 +1,4 @@
-# src/model/train.py - UPDATED FOR COLAB WITH SGD
+# src/model/train.py - UPDATED FOR COLAB
 import torch
 from torch.utils.data import DataLoader
 import os
@@ -6,16 +6,15 @@ import time
 import numpy as np
 
 class Trainer:
-    """Training class for model training - Using SGD for stability"""
+    """Training class for model training"""
     
     def __init__(self, batch_size, learning_rate, data_loader, model, 
-                 model_path, device, class_weights=None, patience=5):
+                 model_path, device, class_weights=None):
         self.batch_size = batch_size
         self.data_loader = data_loader
         self.model = model
         self.lr = learning_rate
         self.device = device
-        self.patience = patience
         
         # Use class weights for imbalance
         if class_weights is not None:
@@ -25,22 +24,12 @@ class Trainer:
             self.loss_fn = torch.nn.CrossEntropyLoss(weight=class_weights)
         else:
             self.loss_fn = torch.nn.CrossEntropyLoss()
+            
+        self.optimizer = torch.optim.Adam(self.model.parameters(), lr=self.lr)
         
-        # USE SGD FOR STABILITY (not Adam)
-        self.optimizer = torch.optim.SGD(
-            self.model.parameters(), 
-            lr=self.lr, 
-            momentum=0.9,
-            weight_decay=1e-4
-        )
-        
-        # Learning rate scheduler
+        # FIXED: Removed verbose=True parameter for Colab compatibility
         self.scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-            self.optimizer, 
-            mode='min', 
-            patience=self.patience, 
-            factor=0.5,
-            verbose=False  # No verbose for Colab compatibility
+            self.optimizer, mode='min', patience=5, factor=0.5
         )
         
         self.model_dir = "models"
@@ -88,10 +77,6 @@ class Trainer:
                 # Backward pass and optimize
                 self.optimizer.zero_grad()
                 loss.backward()
-                
-                # CRITICAL: Gradient clipping for stability
-                torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=0.5)
-                
                 self.optimizer.step()
                 
                 # Calculate metrics
@@ -102,7 +87,7 @@ class Trainer:
                 total += labels.size(0)
                 correct += (predicted == labels).sum().item()
                 
-                # Print progress every 10 batches
+                # Print progress
                 if batch_idx % 10 == 0:
                     batch_time = time.time() - batch_start_time
                     current_lr = self.optimizer.param_groups[0]['lr']
@@ -114,7 +99,7 @@ class Trainer:
             accuracy = 100.0 * correct / total
             epoch_time = time.time() - epoch_start_time
             
-            # Update learning rate scheduler based on validation loss
+            # Update learning rate scheduler
             self.scheduler.step(avg_loss)
             self.current_lr = self.optimizer.param_groups[0]['lr']
             
@@ -137,22 +122,20 @@ class Trainer:
             traceback.print_exc()
             return None, None
     
-    def save_model(self, epoch=None, accuracy=None, final=False):
+    def save_model(self, epoch=None, accuracy=None):
         """Save model checkpoint"""
         try:
             # Create models directory if it doesn't exist
             os.makedirs(self.model_dir, exist_ok=True)
             
-            if final:
-                filename = f"{self.model_path}_final.pth"
-            elif epoch is not None and accuracy is not None:
+            if epoch is not None and accuracy is not None:
                 filename = f"{self.model_path}_epoch{epoch}_acc{accuracy:.2f}.pth"
             else:
                 filename = f"{self.model_path}.pth"
             
             final_path = os.path.join(self.model_dir, filename)
             
-            checkpoint = {
+            torch.save({
                 'epoch': epoch,
                 'model_state_dict': self.model.state_dict(),
                 'optimizer_state_dict': self.optimizer.state_dict(),
@@ -165,14 +148,9 @@ class Trainer:
                 'config': {
                     'batch_size': self.batch_size,
                     'initial_lr': self.lr,
-                    'device': str(self.device),
-                    'optimizer': 'SGD',
-                    'momentum': 0.9,
-                    'weight_decay': 1e-4
+                    'device': str(self.device)
                 }
-            }
-            
-            torch.save(checkpoint, final_path)
+            }, final_path)
             
             print(f"Model saved to: {final_path}")
             return final_path
@@ -205,10 +183,8 @@ class Trainer:
             
             print(f"Model loaded from: {model_path}")
             print(f"Previous training: {len(self.train_loss_history)} epochs")
-            if self.train_loss_history:
-                print(f"Best loss: {min(self.train_loss_history):.4f}")
-            if self.train_acc_history:
-                print(f"Best accuracy: {max(self.train_acc_history):.2f}%")
+            print(f"Best loss: {min(self.train_loss_history) if self.train_loss_history else 'N/A':.4f}")
+            print(f"Best accuracy: {max(self.train_acc_history) if self.train_acc_history else 'N/A':.2f}%")
             
             return checkpoint.get('epoch', 0)
             
@@ -235,14 +211,3 @@ class Trainer:
                 'learning_rate': self.current_lr
             }
         return None
-    
-    def print_config(self):
-        """Print training configuration"""
-        print("\n📋 Training Configuration:")
-        print(f"  Batch size: {self.batch_size}")
-        print(f"  Initial learning rate: {self.lr}")
-        print(f"  Optimizer: SGD with momentum=0.9")
-        print(f"  Weight decay: 1e-4")
-        print(f"  Gradient clipping: max_norm=0.5")
-        print(f"  Device: {self.device}")
-        print(f"  Scheduler: ReduceLROnPlateau (patience={self.patience})")
