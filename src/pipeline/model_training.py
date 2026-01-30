@@ -36,7 +36,7 @@ load_dotenv()
 
 def main():
     """Main training function."""
-    try:
+    try:  # <--- THIS is line 47 - you need the except block at the END of the function!
         # ========== TRAINING CONFIGURATION ==========
         EPOCHS = 10                    # Train for 10 epochs
         BATCH_SIZE = 64                # Increased for GPU efficiency
