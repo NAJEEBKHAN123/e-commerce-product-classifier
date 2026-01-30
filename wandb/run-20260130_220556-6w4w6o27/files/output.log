@@ -1,0 +1,15 @@
+✅ WandB initialized
+📊 Creating dataloaders...
+Creating dataloaders with num_workers=0
+train dataset: 13992 images, 9 categories
+val dataset: 3632 images, 9 categories
+check dataset: 551 images, 9 categories
+✅ Categories (9): ['BABY_PRODUCTS', 'BEAUTY_HEALTH', 'CLOTHING_ACCESSORIES_JEWELLERY', 'ELECTRONICS', 'GROCERY', 'HOBBY_ARTS_STATIONERY', 'HOME_KITCHEN_TOOLS', 'PET_SUPPLIES', 'SPORTS_OUTDOOR']
+✅ Train images: 13992
+✅ Validation images: 3632
+🤖 Initializing model...
+✅ Model loaded on cpu
+🚀 STARTING TRAINING
+========================================
+📅 Epoch 1/10
+========================================
