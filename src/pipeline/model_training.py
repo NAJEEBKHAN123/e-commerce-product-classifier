@@ -73,7 +73,7 @@ def main():
     
     # ========== TRAINING CONFIG ==========
     EPOCHS = 100  # Start with 10 epochs for testing
-    BATCH_SIZE = 32  # Smaller batch for testing
+    BATCH_SIZE = 64  # Smaller batch for testing
     LEARNING_RATE = 0.001
     PATIENCE = 5
     
