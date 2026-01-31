@@ -122,7 +122,11 @@ def main():
 
     # ========== MODEL ==========
     print("\n🤖 Initializing model...")
-    model = ProductCNN(num_classes=len(categories)).to(DEVICE)
+
+    # CHANGE THIS LINE - USE PRETRAINED MODEL!
+    from src.model.cnn import ProductClassifier
+    model = ProductClassifier(num_classes=len(categories), use_pretrained=True).to(DEVICE)
+
     print(f"✅ Model loaded on {DEVICE}")
 
     # ========== TRAINER / EVALUATOR ==========
