@@ -72,10 +72,11 @@ def main():
     """Main training function"""
     
     # ========== TRAINING CONFIG ==========
-    EPOCHS = 100  # Start with 10 epochs for testing
-    BATCH_SIZE = 64  # Smaller batch for testing
+    EPOCHS = 100
+    BATCH_SIZE = 64
     LEARNING_RATE = 0.001
-    PATIENCE = 5
+    PATIENCE = 25  # Increased from 5 to 25
+    ACCURACY_TOLERANCE = 0.2  # Allow 0.2% fluctuation without penalty
     
     # Dataset path - adjust for your setup
     DATA_DIR = os.getenv(
@@ -94,6 +95,8 @@ def main():
     print(f"📦 Batch size: {BATCH_SIZE}")
     print(f"🎯 Learning rate: {LEARNING_RATE}")
     print(f"📁 Data directory: {DATA_DIR}")
+    print(f"⏳ Early stopping patience: {PATIENCE}")
+    print(f"📈 Accuracy tolerance: {ACCURACY_TOLERANCE}%")
     print("=" * 60)
     
     # ========== DATA CHECK ==========
@@ -134,7 +137,9 @@ def main():
                         "batch_size": BATCH_SIZE,
                         "learning_rate": LEARNING_RATE,
                         "device": DEVICE,
-                        "model": "ProductCNN-ResNet50"
+                        "model": "ProductCNN-ResNet50",
+                        "patience": PATIENCE,
+                        "accuracy_tolerance": ACCURACY_TOLERANCE
                     }
                 )
                 use_wandb = True
@@ -263,10 +268,15 @@ def main():
                 'val_acc': val_acc
             })
             
+            # Get current learning rate
+            current_lr = trainer.current_lr if hasattr(trainer, 'current_lr') else LEARNING_RATE
+            
             # Print metrics
             print("\n📈 EPOCH SUMMARY:")
             print(f"   Train Loss: {train_loss:.4f} | Train Acc: {train_acc:.2f}%")
             print(f"   Val Loss:   {val_loss:.4f} | Val Acc:   {val_acc:.2f}%")
+            print(f"   Learning Rate: {current_lr:.6f}")
+            print(f"   Best Accuracy: {best_accuracy:.2f}%")
             
             # Log to WandB
             if use_wandb:
@@ -275,39 +285,91 @@ def main():
                     "train_loss": train_loss,
                     "train_accuracy": train_acc,
                     "val_loss": val_loss,
-                    "val_accuracy": val_acc
+                    "val_accuracy": val_acc,
+                    "learning_rate": current_lr
                 })
             
-            # Save best model
+            # ========== IMPROVED SAVING LOGIC ==========
+            # Save if: 1. New best OR 2. Within tolerance and LR just decreased
+            save_model = False
+            message = ""
+            
             if val_acc > best_accuracy:
                 best_accuracy = val_acc
-                trainer.save_model(epoch + 1, val_acc)
+                save_model = True
                 no_improve = 0
-                print(f"💾 NEW BEST MODEL SAVED (Accuracy: {val_acc:.2f}%)")
+                message = f"💾 NEW BEST MODEL SAVED (Accuracy: {val_acc:.2f}%)"
+            elif val_acc >= best_accuracy - ACCURACY_TOLERANCE:
+                # Within tolerance - check if learning rate just decreased
+                if epoch > 0 and hasattr(trainer, 'previous_lr'):
+                    if trainer.previous_lr > current_lr:
+                        save_model = True
+                        message = f"💾 Saved after LR decrease: {trainer.previous_lr:.6f} → {current_lr:.6f}"
+                        no_improve = max(0, no_improve - 3)  # Partial reset
+                    else:
+                        no_improve += 1
+                        message = f"📊 Maintaining good accuracy: {val_acc:.2f}% (Best: {best_accuracy:.2f}%)"
+                else:
+                    no_improve += 1
+                    message = f"📊 Within tolerance: {val_acc:.2f}% (Best: {best_accuracy:.2f}%)"
             else:
                 no_improve += 1
-                print(f"⏳ No improvement: {no_improve}/{PATIENCE}")
+                message = f"⏳ No improvement: {no_improve}/{PATIENCE}"
+            
+            print(message)
+            
+            # Save model if conditions met
+            if save_model:
+                trainer.save_model(epoch + 1, val_acc)
+            
+            # Store previous LR for comparison
+            if hasattr(trainer, 'current_lr'):
+                trainer.previous_lr = current_lr
+            
+            # ========== SMART EARLY STOPPING ==========
+            if no_improve >= PATIENCE:
+                print(f"🛑 Early stopping check triggered at epoch {epoch + 1}")
                 
-                # Early stopping
-                if no_improve >= PATIENCE:
-                    print(f"🛑 EARLY STOPPING triggered after {epoch + 1} epochs")
+                # Check if we should give model one more chance with LR adjustment
+                if epoch < 30:  # Only for first 30 epochs
+                    print("🔄 Attempting one final LR adjustment before stopping...")
+                    if hasattr(trainer, 'scheduler'):
+                        old_lr = current_lr
+                        # Force a learning rate reduction
+                        trainer.scheduler.step(val_loss)
+                        new_lr = trainer.optimizer.param_groups[0]['lr']
+                        
+                        if new_lr < old_lr:
+                            print(f"✅ LR reduced from {old_lr:.6f} to {new_lr:.6f}")
+                            print(f"🔄 Continuing training for {PATIENCE//2} more epochs...")
+                            no_improve = max(0, no_improve - PATIENCE//2)  # Half reset
+                        else:
+                            print("❌ LR already at minimum, stopping training")
+                            break
+                    else:
+                        print("❌ No scheduler available, stopping training")
+                        break
+                else:
+                    print("✅ Model had sufficient training epochs, stopping")
                     break
         else:
             print("❌ Validation failed this epoch")
+            no_improve += 1  # Count validation failure as no improvement
     
     # ========== TRAINING COMPLETE ==========
     print("\n" + "🎉" * 20)
     print("🎉 TRAINING COMPLETE")
     print("🎉" * 20)
     
-    # Final model save
+    # Save final model
     try:
-        trainer.save_model(EPOCHS, best_accuracy, final=True)
+        final_model_path = os.path.join("models", f"ecommerce_cnn_final_acc{best_accuracy:.2f}.pth")
+        trainer.save_model(epoch + 1, best_accuracy)
         print(f"💾 Final model saved with accuracy: {best_accuracy:.2f}%")
     except Exception as e:
         print(f"⚠️ Could not save final model: {e}")
     
-    # Print summary
+    # Print comprehensive summary
     print("\n📊 TRAINING SUMMARY:")
     print("-" * 40)
     print(f"Total epochs trained: {len(training_history)}")
@@ -316,6 +378,51 @@ def main():
     if training_history:
         print(f"Final training accuracy: {training_history[-1]['train_acc']:.2f}%")
         print(f"Final validation accuracy: {training_history[-1]['val_acc']:.2f}%")
+        print(f"Training/Validation gap: {training_history[-1]['train_acc'] - training_history[-1]['val_acc']:.2f}%")
+        
+        # Calculate improvements
+        if len(training_history) > 1:
+            first_acc = training_history[0]['val_acc']
+            improvement = best_accuracy - first_acc
+            print(f"Total improvement: {improvement:.2f}%")
+    
+    # Plot training history if matplotlib is available
+    try:
+        import matplotlib.pyplot as plt
+        
+        epochs = [h['epoch'] for h in training_history]
+        train_losses = [h['train_loss'] for h in training_history]
+        val_losses = [h['val_loss'] for h in training_history]
+        train_accs = [h['train_acc'] for h in training_history]
+        val_accs = [h['val_acc'] for h in training_history]
+        
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 5))
+        
+        # Loss plot
+        ax1.plot(epochs, train_losses, 'b-', label='Train Loss', linewidth=2)
+        ax1.plot(epochs, val_losses, 'r-', label='Val Loss', linewidth=2)
+        ax1.set_xlabel('Epoch')
+        ax1.set_ylabel('Loss')
+        ax1.set_title('Training and Validation Loss')
+        ax1.legend()
+        ax1.grid(True, alpha=0.3)
+        
+        # Accuracy plot
+        ax2.plot(epochs, train_accs, 'b-', label='Train Acc', linewidth=2)
+        ax2.plot(epochs, val_accs, 'r-', label='Val Acc', linewidth=2)
+        ax2.axhline(y=best_accuracy, color='g', linestyle='--', label=f'Best: {best_accuracy:.2f}%', alpha=0.7)
+        ax2.set_xlabel('Epoch')
+        ax2.set_ylabel('Accuracy (%)')
+        ax2.set_title('Training and Validation Accuracy')
+        ax2.legend()
+        ax2.grid(True, alpha=0.3)
+        
+        plt.tight_layout()
+        plt.savefig('training_history.png', dpi=150, bbox_inches='tight')
+        print(f"📈 Training history saved to: training_history.png")
+        
+    except ImportError:
+        print("⚠️ Matplotlib not available, skipping plots")
     
     # Cleanup
     if use_wandb:

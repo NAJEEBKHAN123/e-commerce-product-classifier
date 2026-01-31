@@ -1,0 +1,42 @@
+2026-01-31 17:35:54,494 INFO    StreamThr :35060 [internal.py:wandb_internal():86] W&B internal server running at pid: 35060, started at: 2026-01-31 17:35:54.492712
+2026-01-31 17:35:54,500 DEBUG   HandlerThread:35060 [handler.py:handle_request():146] handle_request: status
+2026-01-31 17:35:54,511 INFO    WriterThread:35060 [datastore.py:open_for_write():85] open: D:\ecommerce-product-classifier\wandb\run-20260131_173554-yrgf6q40\run-yrgf6q40.wandb
+2026-01-31 17:35:54,514 DEBUG   SenderThread:35060 [sender.py:send():380] send: header
+2026-01-31 17:35:54,640 DEBUG   SenderThread:35060 [sender.py:send():380] send: run
+2026-01-31 17:35:56,474 INFO    SenderThread:35060 [dir_watcher.py:__init__():211] watching files in: D:\ecommerce-product-classifier\wandb\run-20260131_173554-yrgf6q40\files
+2026-01-31 17:35:56,476 INFO    SenderThread:35060 [sender.py:_start_run_threads():1124] run started: yrgf6q40 with start time 1769862954.499494
+2026-01-31 17:35:56,530 DEBUG   HandlerThread:35060 [handler.py:handle_request():146] handle_request: check_version
+2026-01-31 17:35:56,531 DEBUG   SenderThread:35060 [sender.py:send_request():407] send_request: check_version
+2026-01-31 17:35:58,222 DEBUG   HandlerThread:35060 [handler.py:handle_request():146] handle_request: run_start
+2026-01-31 17:35:58,271 DEBUG   HandlerThread:35060 [system_info.py:__init__():32] System info init
+2026-01-31 17:35:58,271 DEBUG   HandlerThread:35060 [system_info.py:__init__():47] System info init done
+2026-01-31 17:35:58,271 INFO    HandlerThread:35060 [system_monitor.py:start():194] Starting system monitor
+2026-01-31 17:35:58,272 INFO    SystemMonitor:35060 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2026-01-31 17:35:58,273 INFO    HandlerThread:35060 [system_monitor.py:probe():214] Collecting system info
+2026-01-31 17:35:58,279 INFO    SystemMonitor:35060 [interfaces.py:start():190] Started cpu monitoring
+2026-01-31 17:35:58,280 DEBUG   HandlerThread:35060 [system_info.py:probe():196] Probing system
+2026-01-31 17:35:58,281 INFO    SystemMonitor:35060 [interfaces.py:start():190] Started disk monitoring
+2026-01-31 17:35:58,284 INFO    SystemMonitor:35060 [interfaces.py:start():190] Started memory monitoring
+2026-01-31 17:35:58,305 INFO    SystemMonitor:35060 [interfaces.py:start():190] Started network monitoring
+2026-01-31 17:35:58,327 DEBUG   HandlerThread:35060 [system_info.py:_probe_git():181] Probing git
+2026-01-31 17:35:58,526 DEBUG   HandlerThread:35060 [system_info.py:_probe_git():189] Probing git done
+2026-01-31 17:35:58,527 DEBUG   HandlerThread:35060 [system_info.py:probe():244] Probing system done
+2026-01-31 17:35:58,527 DEBUG   HandlerThread:35060 [system_monitor.py:probe():223] {'os': 'Windows-10-10.0.26100-SP0', 'python': '3.11.9', 'heartbeatAt': '2026-01-31T12:35:58.281217', 'startedAt': '2026-01-31T12:35:54.466844', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': 'D:\\ecommerce-product-classifier\\src\\pipeline\\model_training.py', 'codePathLocal': 'src\\pipeline\\model_training.py', 'codePath': 'src\\pipeline\\model_training.py', 'git': {'remote': 'git@github.com:NAJEEBKHAN123/e-commerce-product-classifier.git', 'commit': 'a8f8c3aea95b577edaaa7a2ed1a109f8db5fd7b8'}, 'email': 'najeebkhanlaku@gmail.com', 'root': 'D:/ecommerce-product-classifier', 'host': 'DESKTOP-ETI9000', 'username': 'NAJEEB ULLAH', 'executable': 'D:\\ecommerce-product-classifier\\.venv\\Scripts\\python.exe', 'cpu_count': 4, 'cpu_count_logical': 8, 'cpu_freq': {'current': 1496.0, 'min': 0.0, 'max': 1896.0}, 'cpu_freq_per_core': [{'current': 1496.0, 'min': 0.0, 'max': 1896.0}], 'disk': {'/': {'total': 140.72069931030273, 'used': 29.154521942138672}}, 'memory': {'total': 7.846885681152344}}
+2026-01-31 17:35:58,528 INFO    HandlerThread:35060 [system_monitor.py:probe():224] Finished collecting system info
+2026-01-31 17:35:58,528 INFO    HandlerThread:35060 [system_monitor.py:probe():227] Publishing system info
+2026-01-31 17:35:58,528 DEBUG   HandlerThread:35060 [system_info.py:_save_pip():52] Saving list of pip packages installed into the current environment
+2026-01-31 17:35:58,532 DEBUG   HandlerThread:35060 [system_info.py:_save_pip():68] Saving pip packages done
+2026-01-31 17:35:58,534 INFO    HandlerThread:35060 [system_monitor.py:probe():229] Finished publishing system info
+2026-01-31 17:35:58,551 DEBUG   SenderThread:35060 [sender.py:send():380] send: files
+2026-01-31 17:35:58,551 INFO    SenderThread:35060 [sender.py:_save_file():1380] saving file wandb-metadata.json with policy now
+2026-01-31 17:35:58,570 DEBUG   HandlerThread:35060 [handler.py:handle_request():146] handle_request: stop_status
+2026-01-31 17:35:58,571 DEBUG   SenderThread:35060 [sender.py:send_request():407] send_request: stop_status
+2026-01-31 17:35:58,575 DEBUG   HandlerThread:35060 [handler.py:handle_request():146] handle_request: internal_messages
+2026-01-31 17:35:59,059 DEBUG   SenderThread:35060 [sender.py:send():380] send: telemetry
+2026-01-31 17:35:59,483 INFO    Thread-16 :35060 [dir_watcher.py:_on_file_created():271] file/dir created: D:\ecommerce-product-classifier\wandb\run-20260131_173554-yrgf6q40\files\requirements.txt
+2026-01-31 17:35:59,484 INFO    Thread-16 :35060 [dir_watcher.py:_on_file_created():271] file/dir created: D:\ecommerce-product-classifier\wandb\run-20260131_173554-yrgf6q40\files\wandb-metadata.json
+2026-01-31 17:35:59,484 INFO    Thread-16 :35060 [dir_watcher.py:_on_file_created():271] file/dir created: D:\ecommerce-product-classifier\wandb\run-20260131_173554-yrgf6q40\files\output.log
+2026-01-31 17:36:00,288 DEBUG   HandlerThread:35060 [handler.py:handle_request():146] handle_request: status_report
+2026-01-31 17:36:01,485 INFO    Thread-16 :35060 [dir_watcher.py:_on_file_modified():288] file/dir modified: D:\ecommerce-product-classifier\wandb\run-20260131_173554-yrgf6q40\files\output.log
+2026-01-31 17:36:02,233 INFO    wandb-upload_0:35060 [upload_job.py:push():131] Uploaded file C:\Users\NAJEEB~1\AppData\Local\Temp\tmpusz07i6bwandb\4d8gwpxx-wandb-metadata.json
+2026-01-31 17:36:03,525 INFO    Thread-16 :35060 [dir_watcher.py:_on_file_modified():288] file/dir modified: D:\ecommerce-product-classifier\wandb\run-20260131_173554-yrgf6q40\files\output.log
