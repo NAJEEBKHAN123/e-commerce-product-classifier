@@ -1,0 +1,121 @@
+✅ WandB initialized
+📊 Creating dataloaders...
+📊 Creating dataloaders with batch_size=64, workers=0
+train dataset: 13992 images, 9 categories
+val dataset: 3632 images, 9 categories
+check dataset: 551 images, 9 categories
+✅ Train: 13992 images
+✅ Val: 3632 images
+✅ Test: 551 images
+✅ Categories: ['BABY_PRODUCTS', 'BEAUTY_HEALTH', 'CLOTHING_ACCESSORIES_JEWELLERY', 'ELECTRONICS', 'GROCERY', 'HOBBY_ARTS_STATIONERY', 'HOME_KITCHEN_TOOLS', 'PET_SUPPLIES', 'SPORTS_OUTDOOR']
+📈 Class distribution: [1087, 1202, 1071, 1353, 3978, 1091, 1715, 1260, 1235]
+⚖️  Class weights: [1.4302361011505127, 1.2933999300003052, 1.451602816581726, 1.149051547050476, 0.3908161520957947, 1.424992322921753, 0.9065111875534058, 1.2338624000549316, 1.2588393688201904]
+✅ Categories (9): ['BABY_PRODUCTS', 'BEAUTY_HEALTH', 'CLOTHING_ACCESSORIES_JEWELLERY', 'ELECTRONICS', 'GROCERY', 'HOBBY_ARTS_STATIONERY', 'HOME_KITCHEN_TOOLS', 'PET_SUPPLIES', 'SPORTS_OUTDOOR']
+✅ Train images: 13992
+✅ Validation images: 3632
+🤖 Initializing model...
+D:\ecommerce-product-classifier\.venv\Lib\site-packages\torchvision\models\_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+D:\ecommerce-product-classifier\.venv\Lib\site-packages\torchvision\models\_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet50_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet50_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Downloading: "https://download.pytorch.org/models/resnet50-0676ba61.pth" to C:\Users\NAJEEB ULLAH/.cache\torch\hub\checkpoints\resnet50-0676ba61.pth
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+100%|█████████████████████████████████████████████████████████████████████████████████████▊| 97.5M/97.8M [00:30<00:00, 2.86MB/s]
+✅ Loaded ResNet50 (pretrained=True)
+   Total parameters: 24,561,737
+   Trainable parameters: 16,018,441
+✅ Model loaded on cpu
+🚀 STARTING TRAINING
+========================================
+📅 Epoch 1/10
+
+100%|██████████████████████████████████████████████████████████████████████████████████████| 97.8M/97.8M [00:30<00:00, 3.32MB/s]
+Epoch 1, Batch 0/219: Loss = 2.1881, Acc = 6.25%, LR = 0.001000, Time = 17.27s
+Error in sys.excepthook:
+Traceback (most recent call last):
+  File "C:\Users\NAJEEB ULLAH\AppData\Local\Programs\Python\Python311\Lib\linecache.py", line 72, in checkcache
+    stat = os.stat(fullname)
+           ^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+Original exception was:
+Traceback (most recent call last):
+  File "D:\ecommerce-product-classifier\src\pipeline\model_training.py", line 218, in <module>
+    best_acc = main()
+               ^^^^^^
+  File "D:\ecommerce-product-classifier\src\pipeline\model_training.py", line 161, in main
+    train_loss, train_acc = trainer.start_training_loop(epoch + 1)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\src\model\train.py", line 71, in start_training_loop
+    outputs = self.model(images)
+              ^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\src\model\cnn.py", line 39, in forward
+    return self.backbone(x)
+           ^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torchvision\models\resnet.py", line 285, in forward
+    return self._forward_impl(x)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torchvision\models\resnet.py", line 273, in _forward_impl
+    x = self.layer1(x)
+        ^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\nn\modules\container.py", line 215, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torchvision\models\resnet.py", line 155, in forward
+    out = self.bn3(out)
+          ^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\nn\modules\batchnorm.py", line 171, in forward
+    return F.batch_norm(
+           ^^^^^^^^^^^^^
+  File "D:\ecommerce-product-classifier\.venv\Lib\site-packages\torch\nn\functional.py", line 2478, in batch_norm
+    return torch.batch_norm(
+           ^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "D:\ecommerce-product-classifier\src\pipeline\model_training.py", line 222, in <module>
+    print("\n⚠️ Training interrupted")
+KeyboardInterrupt

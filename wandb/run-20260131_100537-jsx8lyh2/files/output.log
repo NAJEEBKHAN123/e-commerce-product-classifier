@@ -1,0 +1,28 @@
+✅ WandB initialized
+📊 Creating dataloaders...
+📊 Creating dataloaders with batch_size=64, workers=0
+train dataset: 13992 images, 9 categories
+val dataset: 3632 images, 9 categories
+check dataset: 551 images, 9 categories
+✅ Train: 13992 images
+✅ Val: 3632 images
+✅ Test: 551 images
+✅ Categories: ['BABY_PRODUCTS', 'BEAUTY_HEALTH', 'CLOTHING_ACCESSORIES_JEWELLERY', 'ELECTRONICS', 'GROCERY', 'HOBBY_ARTS_STATIONERY', 'HOME_KITCHEN_TOOLS', 'PET_SUPPLIES', 'SPORTS_OUTDOOR']
+📈 Class distribution: [1087, 1202, 1071, 1353, 3978, 1091, 1715, 1260, 1235]
+⚖️  Class weights: [1.4302361011505127, 1.2933999300003052, 1.451602816581726, 1.149051547050476, 0.3908161520957947, 1.424992322921753, 0.9065111875534058, 1.2338624000549316, 1.2588393688201904]
+✅ Categories (9): ['BABY_PRODUCTS', 'BEAUTY_HEALTH', 'CLOTHING_ACCESSORIES_JEWELLERY', 'ELECTRONICS', 'GROCERY', 'HOBBY_ARTS_STATIONERY', 'HOME_KITCHEN_TOOLS', 'PET_SUPPLIES', 'SPORTS_OUTDOOR']
+✅ Train images: 13992
+✅ Validation images: 3632
+🤖 Initializing model...
+✅ Loaded ResNet50 (pretrained=True)
+   Total parameters: 24,561,737
+   Trainable parameters: 16,018,441
+✅ Model loaded on cpu
+🚀 STARTING TRAINING
+========================================
+📅 Epoch 1/10
+========================================
+D:\ecommerce-product-classifier\.venv\Lib\site-packages\torchvision\models\_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+D:\ecommerce-product-classifier\.venv\Lib\site-packages\torchvision\models\_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet50_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet50_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)

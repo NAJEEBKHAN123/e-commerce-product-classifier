@@ -1,0 +1,28 @@
+2026-01-31 12:11:09,867 INFO    MainThread:23140 [wandb_setup.py:_flush():76] Current SDK version is 0.16.0
+2026-01-31 12:11:09,867 INFO    MainThread:23140 [wandb_setup.py:_flush():76] Configure stats pid to 23140
+2026-01-31 12:11:09,867 INFO    MainThread:23140 [wandb_setup.py:_flush():76] Loading settings from C:\Users\NAJEEB ULLAH\.config\wandb\settings
+2026-01-31 12:11:09,868 INFO    MainThread:23140 [wandb_setup.py:_flush():76] Loading settings from D:\ecommerce-product-classifier\wandb\settings
+2026-01-31 12:11:09,868 INFO    MainThread:23140 [wandb_setup.py:_flush():76] Loading settings from environment variables: {'api_key': '***REDACTED***'}
+2026-01-31 12:11:09,868 INFO    MainThread:23140 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2026-01-31 12:11:09,868 INFO    MainThread:23140 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'src\\pipeline\\model_training.py', 'program_abspath': 'D:\\ecommerce-product-classifier\\src\\pipeline\\model_training.py', 'program': 'D:\\ecommerce-product-classifier\\src\\pipeline\\model_training.py'}
+2026-01-31 12:11:09,869 INFO    MainThread:23140 [wandb_init.py:_log_setup():524] Logging user logs to D:\ecommerce-product-classifier\wandb\run-20260131_121109-byhq3u70\logs\debug.log
+2026-01-31 12:11:09,869 INFO    MainThread:23140 [wandb_init.py:_log_setup():525] Logging internal logs to D:\ecommerce-product-classifier\wandb\run-20260131_121109-byhq3u70\logs\debug-internal.log
+2026-01-31 12:11:09,869 INFO    MainThread:23140 [wandb_init.py:init():564] calling init triggers
+2026-01-31 12:11:09,870 INFO    MainThread:23140 [wandb_init.py:init():571] wandb.init called with sweep_config: {}
+config: {'epochs': 100, 'batch_size': 64, 'learning_rate': 0.001, 'device': 'cpu', 'model': 'ProductCNN'}
+2026-01-31 12:11:09,870 INFO    MainThread:23140 [wandb_init.py:init():614] starting backend
+2026-01-31 12:11:09,870 INFO    MainThread:23140 [wandb_init.py:init():618] setting up manager
+2026-01-31 12:11:09,875 INFO    MainThread:23140 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=spawn, using: spawn
+2026-01-31 12:11:09,883 INFO    MainThread:23140 [wandb_init.py:init():624] backend started and connected
+2026-01-31 12:11:09,894 INFO    MainThread:23140 [wandb_init.py:init():716] updated telemetry
+2026-01-31 12:11:10,050 INFO    MainThread:23140 [wandb_init.py:init():749] communicating run to backend with 90.0 second timeout
+2026-01-31 12:11:11,997 INFO    MainThread:23140 [wandb_run.py:_on_init():2254] communicating current version
+2026-01-31 12:11:13,735 INFO    MainThread:23140 [wandb_run.py:_on_init():2263] got version response upgrade_message: "wandb version 0.24.1 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2026-01-31 12:11:13,735 INFO    MainThread:23140 [wandb_init.py:init():800] starting run threads in backend
+2026-01-31 12:11:14,125 INFO    MainThread:23140 [wandb_run.py:_console_start():2233] atexit reg
+2026-01-31 12:11:14,125 INFO    MainThread:23140 [wandb_run.py:_redirect():2088] redirect: wrap_raw
+2026-01-31 12:11:14,125 INFO    MainThread:23140 [wandb_run.py:_redirect():2153] Wrapping output streams.
+2026-01-31 12:11:14,125 INFO    MainThread:23140 [wandb_run.py:_redirect():2178] Redirects installed.
+2026-01-31 12:11:14,128 INFO    MainThread:23140 [wandb_init.py:init():841] run started, returning control to user process
+2026-01-31 12:11:23,776 WARNING MsgRouterThr:23140 [router.py:message_loop():77] message_loop has been closed

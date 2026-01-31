@@ -32,16 +32,11 @@ from dotenv import load_dotenv
 # ================= ENV VARIABLES =================
 load_dotenv()
 
-# ================= AMP / Mixed Precision =================
-use_amp = torch.cuda.is_available()
-if use_amp:
-    print("⚡ Mixed precision (AMP) enabled for faster GPU training")
-
 def main():
     """Main training function"""
 
     # ========== TRAINING CONFIG ==========
-    EPOCHS = 10
+    EPOCHS = 100
     BATCH_SIZE = 64
     LEARNING_RATE = 0.001
     PATIENCE = 5
@@ -122,11 +117,7 @@ def main():
 
     # ========== MODEL ==========
     print("\n🤖 Initializing model...")
-
-    # CHANGE THIS LINE - USE PRETRAINED MODEL!
-    from src.model.cnn import ProductClassifier
-    model = ProductClassifier(num_classes=len(categories), use_pretrained=True).to(DEVICE)
-
+    model = ProductCNN(num_classes=len(categories)).to(DEVICE)
     print(f"✅ Model loaded on {DEVICE}")
 
     # ========== TRAINER / EVALUATOR ==========
@@ -135,10 +126,10 @@ def main():
         learning_rate=LEARNING_RATE,
         data_loader=train_loader,
         model=model,
-        model_path="models/ecommerce_cnn",
+        model_path="ecommerce_cnn",
         device=DEVICE,
-        class_weights=class_weights,
-        use_amp=use_amp  # <- AMP flag for trainer
+        class_weights=class_weights
+        # Removed: use_amp=use_amp - Trainer doesn't support this parameter
     )
 
     evaluator = Evaluator(

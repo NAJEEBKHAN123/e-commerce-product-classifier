@@ -14,4 +14,8 @@ dataset/
 *.pt
 *.pth
 
+dataset_normalized/
+*.h5
+*.pt
+*.pth
 

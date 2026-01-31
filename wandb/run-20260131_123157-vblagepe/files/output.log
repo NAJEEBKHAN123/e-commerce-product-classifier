@@ -1,0 +1,20 @@
+✅ WandB initialized
+📊 Creating dataloaders...
+📊 Using num_workers=0 for DataLoader
+train dataset: 13992 images, 9 categories
+val dataset: 3632 images, 9 categories
+check dataset: 551 images, 9 categories
+✅ Categories (9): ['BABY_PRODUCTS', 'BEAUTY_HEALTH', 'CLOTHING_ACCESSORIES_JEWELLERY', 'ELECTRONICS', 'GROCERY', 'HOBBY_ARTS_STATIONERY', 'HOME_KITCHEN_TOOLS', 'PET_SUPPLIES', 'SPORTS_OUTDOOR']
+✅ Train images: 13992
+✅ Validation images: 3632
+🤖 Initializing model...
+✅ Model loaded on cpu
+❌ Error: Trainer.__init__() got an unexpected keyword argument 'use_amp'
+Traceback (most recent call last):
+  File "D:\ecommerce-product-classifier\src\pipeline\model_training.py", line 215, in <module>
+    best_acc = main()
+               ^^^^^^
+  File "D:\ecommerce-product-classifier\src\pipeline\model_training.py", line 129, in main
+    trainer = Trainer(
+              ^^^^^^^^
+TypeError: Trainer.__init__() got an unexpected keyword argument 'use_amp'
