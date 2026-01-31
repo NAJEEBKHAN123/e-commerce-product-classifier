@@ -1,3 +1,4 @@
+# /content/e-commerce-product-classifier/src/model/cnn.py
 """
 E-commerce Product Classifier CNN Model
 Optimized for 9 product categories with proper architecture
@@ -5,80 +6,54 @@ Optimized for 9 product categories with proper architecture
 
 import torch
 import torch.nn as nn
+import torchvision.models as models
 
 
 class ProductCNN(nn.Module):
     """
     CNN model for e-commerce product classification.
     Features:
-    - Batch Normalization for stable training
-    - Global Average Pooling to reduce parameters
+    - Uses pretrained ResNet50 for better performance
+    - Custom classifier head for 9 product categories
     - Proper weight initialization
-    - Dropout for regularization
     """
     
-    def __init__(self, num_classes=9):
+    def __init__(self, num_classes=9, use_pretrained=True):
         """
         Initialize the CNN model.
         
         Args:
             num_classes (int): Number of output classes (default: 9)
+            use_pretrained (bool): Use pretrained ImageNet weights
         """
         super(ProductCNN, self).__init__()
         
-        # Feature extractor with batch normalization
-        self.features = nn.Sequential(
-            # Block 1: 224x224 -> 112x112
-            nn.Conv2d(3, 64, kernel_size=3, padding=1),
-            nn.BatchNorm2d(64),
-            nn.ReLU(inplace=True),
-            nn.MaxPool2d(kernel_size=2, stride=2),
-            
-            # Block 2: 112x112 -> 56x56
-            nn.Conv2d(64, 128, kernel_size=3, padding=1),
-            nn.BatchNorm2d(128),
-            nn.ReLU(inplace=True),
-            nn.MaxPool2d(kernel_size=2, stride=2),
-            
-            # Block 3: 56x56 -> 28x28
-            nn.Conv2d(128, 256, kernel_size=3, padding=1),
-            nn.BatchNorm2d(256),
-            nn.ReLU(inplace=True),
-            nn.MaxPool2d(kernel_size=2, stride=2),
-            
-            # Block 4: 28x28 -> 14x14
-            nn.Conv2d(256, 512, kernel_size=3, padding=1),
-            nn.BatchNorm2d(512),
-            nn.ReLU(inplace=True),
-            nn.MaxPool2d(kernel_size=2, stride=2),
-            
-            # Global Average Pooling (reduces parameters drastically)
-            nn.AdaptiveAvgPool2d((1, 1))
-        )
+        # Load pretrained ResNet50
+        self.resnet = models.resnet50(pretrained=use_pretrained)
         
-        # Classifier - Efficient design
-        self.classifier = nn.Sequential(
-            nn.Flatten(),
-            nn.Linear(512, 256),
-            nn.ReLU(inplace=True),
+        # Freeze early layers if needed (optional)
+        # for param in self.resnet.parameters():
+        #     param.requires_grad = False
+        
+        # Replace the final fully connected layer
+        num_features = self.resnet.fc.in_features
+        
+        # Custom classifier head
+        self.resnet.fc = nn.Sequential(
             nn.Dropout(0.5),
-            nn.Linear(256, num_classes)  # Output raw logits
+            nn.Linear(num_features, 512),
+            nn.ReLU(inplace=True),
+            nn.Dropout(0.3),
+            nn.Linear(512, num_classes)
         )
         
-        # Initialize weights properly
-        self._initialize_weights()
+        # Initialize new layers properly
+        self._initialize_weights(self.resnet.fc)
     
-    def _initialize_weights(self):
-        """Initialize model weights using proper methods."""
-        for m in self.modules():
-            if isinstance(m, nn.Conv2d):
-                nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')
-                if m.bias is not None:
-                    nn.init.constant_(m.bias, 0)
-            elif isinstance(m, nn.BatchNorm2d):
-                nn.init.constant_(m.weight, 1)
-                nn.init.constant_(m.bias, 0)
-            elif isinstance(m, nn.Linear):
+    def _initialize_weights(self, module):
+        """Initialize weights for new layers."""
+        for m in module.modules():
+            if isinstance(m, nn.Linear):
                 nn.init.normal_(m.weight, 0, 0.01)
                 nn.init.constant_(m.bias, 0)
     
@@ -92,45 +67,61 @@ class ProductCNN(nn.Module):
         Returns:
             torch.Tensor: Raw logits of shape (batch_size, num_classes)
         """
-        x = self.features(x)
-        x = self.classifier(x)
-        return x  # Return logits, NOT softmax
+        return self.resnet(x)
     
     def get_parameter_count(self):
         """Get total number of trainable parameters."""
         return sum(p.numel() for p in self.parameters() if p.requires_grad)
+    
+    def freeze_backbone(self):
+        """Freeze ResNet backbone layers."""
+        for param in self.resnet.parameters():
+            param.requires_grad = False
+        # Ensure classifier is trainable
+        for param in self.resnet.fc.parameters():
+            param.requires_grad = True
+    
+    def unfreeze_backbone(self):
+        """Unfreeze all layers."""
+        for param in self.parameters():
+            param.requires_grad = True
 
 
-# Optional: Add a simpler version for testing
+# Alternative simpler model
 class SimpleProductCNN(nn.Module):
-    """Simpler version for quick testing/development."""
+    """Simpler CNN for product classification."""
     
     def __init__(self, num_classes=9):
         super(SimpleProductCNN, self).__init__()
         
         self.features = nn.Sequential(
+            # Block 1
             nn.Conv2d(3, 32, kernel_size=3, padding=1),
             nn.BatchNorm2d(32),
-            nn.ReLU(),
-            nn.MaxPool2d(2),
+            nn.ReLU(inplace=True),
+            nn.MaxPool2d(kernel_size=2, stride=2),
             
+            # Block 2
             nn.Conv2d(32, 64, kernel_size=3, padding=1),
             nn.BatchNorm2d(64),
-            nn.ReLU(),
-            nn.MaxPool2d(2),
+            nn.ReLU(inplace=True),
+            nn.MaxPool2d(kernel_size=2, stride=2),
             
+            # Block 3
             nn.Conv2d(64, 128, kernel_size=3, padding=1),
             nn.BatchNorm2d(128),
-            nn.ReLU(),
-            nn.MaxPool2d(2),
+            nn.ReLU(inplace=True),
+            nn.MaxPool2d(kernel_size=2, stride=2),
             
+            # Global Average Pooling
             nn.AdaptiveAvgPool2d((1, 1))
         )
         
         self.classifier = nn.Sequential(
             nn.Flatten(),
+            nn.Dropout(0.5),
             nn.Linear(128, 64),
-            nn.ReLU(),
+            nn.ReLU(inplace=True),
             nn.Dropout(0.3),
             nn.Linear(64, num_classes)
         )
@@ -139,20 +130,27 @@ class SimpleProductCNN(nn.Module):
         x = self.features(x)
         x = self.classifier(x)
         return x
+    
+    def get_parameter_count(self):
+        return sum(p.numel() for p in self.parameters() if p.requires_grad)
 
 
 # Test function
 if __name__ == "__main__":
-    # Quick test
+    # Test ProductCNN
     model = ProductCNN(num_classes=9)
-    print(f"Model architecture: {model}")
-    print(f"Total parameters: {model.get_parameter_count():,}")
+    print(f"✅ ProductCNN created")
+    print(f"📊 Total parameters: {model.get_parameter_count():,}")
     
     # Test forward pass
-    test_input = torch.randn(4, 3, 224, 224)
+    test_input = torch.randn(2, 3, 224, 224)
     output = model(test_input)
-    print(f"\nTest input shape: {test_input.shape}")
-    print(f"Test output shape: {output.shape}")
-    print(f"Output range: [{output.min().item():.3f}, {output.max().item():.3f}]")
+    print(f"📐 Input shape: {test_input.shape}")
+    print(f"📐 Output shape: {output.shape}")
     
-    print("\n✅ Model test passed!")
+    # Test SimpleProductCNN
+    simple_model = SimpleProductCNN(num_classes=9)
+    print(f"\n✅ SimpleProductCNN created")
+    print(f"📊 Total parameters: {simple_model.get_parameter_count():,}")
+    
+    print("\n🎯 All models working correctly!")

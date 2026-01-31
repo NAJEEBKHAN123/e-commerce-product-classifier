@@ -1,0 +1,45 @@
+{
+    "os": "Windows-10-10.0.26100-SP0",
+    "python": "3.11.9",
+    "heartbeatAt": "2026-01-31T08:47:05.468576",
+    "startedAt": "2026-01-31T08:47:01.302979",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "D:\\ecommerce-product-classifier\\src\\pipeline\\model_training.py",
+    "codePathLocal": "src\\pipeline\\model_training.py",
+    "codePath": "src\\pipeline\\model_training.py",
+    "git": {
+        "remote": "git@github.com:NAJEEBKHAN123/e-commerce-product-classifier.git",
+        "commit": "23d05d6dd5c5956cc8d55c3e8e5aba2bffaf9281"
+    },
+    "email": "najeebkhanlaku@gmail.com",
+    "root": "D:/ecommerce-product-classifier",
+    "host": "DESKTOP-ETI9000",
+    "username": "NAJEEB ULLAH",
+    "executable": "D:\\ecommerce-product-classifier\\.venv\\Scripts\\python.exe",
+    "cpu_count": 4,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 1696.0,
+        "min": 0.0,
+        "max": 1896.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 1696.0,
+            "min": 0.0,
+            "max": 1896.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 140.72069931030273,
+            "used": 29.154281616210938
+        }
+    },
+    "memory": {
+        "total": 7.846885681152344
+    }
+}
