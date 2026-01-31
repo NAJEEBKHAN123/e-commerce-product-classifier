@@ -1,0 +1,43 @@
+wandb_version: 1
+
+epochs:
+  desc: null
+  value: 100
+batch_size:
+  desc: null
+  value: 64
+learning_rate:
+  desc: null
+  value: 0.001
+device:
+  desc: null
+  value: cpu
+model:
+  desc: null
+  value: ProductCNN
+_wandb:
+  desc: null
+  value:
+    python_version: 3.11.9
+    cli_version: 0.16.0
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1769847272.760703
+    t:
+      1:
+      - 1
+      - 5
+      - 41
+      - 53
+      - 55
+      3:
+      - 13
+      - 16
+      - 23
+      4: 3.11.9
+      5: 0.16.0
+      8:
+      - 3
+      - 5
+      13: windows-amd64

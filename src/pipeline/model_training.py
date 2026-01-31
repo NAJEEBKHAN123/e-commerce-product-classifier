@@ -1,3 +1,4 @@
+# D:\ecommerce-product-classifier\src\pipeline\model_training.py
 import multiprocessing
 import sys
 import os
@@ -43,7 +44,7 @@ def main():
 
     DATA_DIR = os.getenv(
         "DATASET_PATH",
-        "/content/drive/MyDrive/dataset"
+        "D:/ecommerce-product-classifier/dataset"  # Update for local Windows
     )
 
     DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
@@ -62,6 +63,7 @@ def main():
     # ========== DATA CHECK ==========
     if not os.path.exists(DATA_DIR):
         print(f"❌ Dataset not found: {DATA_DIR}")
+        print("ℹ️ Please update DATASET_PATH in your .env file")
         return None
     print("✅ Dataset found")
 
@@ -92,12 +94,9 @@ def main():
     # ========== DATALOADERS ==========
     print("\n📊 Creating dataloaders...")
     try:
-        if os.name == "nt":
-            num_workers = 0
-        else:
-            cpu_count = multiprocessing.cpu_count()
-            num_workers = min(8, cpu_count // 2)  # faster for Colab/Linux
-
+        # Windows-specific settings
+        num_workers = 0  # Windows often has issues with >0 workers
+        
         train_loader, val_loader, _, class_weights, categories = create_dataloaders(
             data_dir=DATA_DIR,
             batch_size=BATCH_SIZE,
@@ -113,6 +112,8 @@ def main():
 
     except Exception as e:
         print(f"❌ Dataloader error: {e}")
+        import traceback
+        traceback.print_exc()
         return None
 
     # ========== MODEL ==========
@@ -129,7 +130,6 @@ def main():
         model_path="ecommerce_cnn",
         device=DEVICE,
         class_weights=class_weights
-        # Removed: use_amp=use_amp - Trainer doesn't support this parameter
     )
 
     evaluator = Evaluator(
