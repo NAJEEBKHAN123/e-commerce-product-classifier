@@ -58,10 +58,7 @@ def main():
     ACCURACY_TOLERANCE = 0.2
     
     # Dataset path
-    DATA_DIR = os.getenv(
-        "DATASET_PATH",
-        "/content/drive/MyDrive/dataset"
-    )
+    DATA_DIR = os.getenv("DATASET_PATH", "/content/drive/MyDrive/dataset")
     
     DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
