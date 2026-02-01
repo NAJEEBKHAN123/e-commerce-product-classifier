@@ -79,9 +79,7 @@ def main():
     ACCURACY_TOLERANCE = 0.2  # Allow 0.2% fluctuation without penalty
     
     # Dataset path - adjust for your setup
-    DATA_DIR = os.getenv(
-        "/content/drive/MyDrive/dataset"  # Default Colab path
-    )
+    DATA_DIR =  "/content/drive/MyDrive/dataset"
     
     DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
     
