@@ -48,20 +48,23 @@ except ImportError:
 # ================= MAIN FUNCTION ======================
 # ======================================================
 def main():
-
-    # ===== TRAINING CONFIG =====
+    """Main training function"""
+    
+    # ========== TRAINING CONFIG ==========
     EPOCHS = 50
     BATCH_SIZE = 64
     LEARNING_RATE = 0.001
-    PATIENCE = 10
+    PATIENCE = 25
     ACCURACY_TOLERANCE = 0.2
-
+    
+    # Dataset path
     DATA_DIR = os.getenv(
         "DATASET_PATH",
         "/content/drive/MyDrive/dataset"
     )
-
+    
     DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+
 
     # ===== PRINT CONFIG =====
     print("=" * 60)
