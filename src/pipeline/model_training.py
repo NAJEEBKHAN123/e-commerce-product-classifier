@@ -80,7 +80,6 @@ def main():
     
     # Dataset path - adjust for your setup
     DATA_DIR = os.getenv(
-        "DATASET_PATH",
         "/content/drive/MyDrive/dataset"  # Default Colab path
     )
     
