@@ -72,7 +72,7 @@ def main():
     """Main training function"""
     
     # ========== TRAINING CONFIG ==========
-    EPOCHS = 100
+    EPOCHS = 50
     BATCH_SIZE = 64
     LEARNING_RATE = 0.001
     PATIENCE = 25  # Increased from 5 to 25

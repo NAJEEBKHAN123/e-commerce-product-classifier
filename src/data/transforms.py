@@ -8,6 +8,12 @@ import torchvision.transforms as transforms
 # Much stronger augmentation for better generalization
 train_transform = transforms.Compose([
     # Random resized crop with varied scales
+    # `transforms.RandomResizedCrop(224, scale=(0.7, 1.0))` is a data augmentation technique used in
+    # training transforms. It randomly crops the input image to the specified size (224x224 in this
+    # case) and aspect ratio. The `scale=(0.7, 1.0)` parameter specifies the range of scales to be
+    # sampled from for resizing the cropped image. In this case, the cropped image can be resized to a
+    # scale between 70% and 100% of the original size, introducing variability in the training data to
+    # improve model generalization.
     transforms.RandomResizedCrop(224, scale=(0.7, 1.0)),
     
     # Geometric transformations
